@@ -2,20 +2,24 @@ name: Run Rubocop
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
+
+env:
+  RAILS_ENV: test
+  BUNDLE_FORCE_RUBY_PLATFORM: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ruby:3.1
 
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Install ruby dependencies
-      run: bundler install
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
 
     - name: Run rubocop
       run: bundler exec rubocop

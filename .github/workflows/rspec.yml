@@ -1,0 +1,50 @@
+name: Run rspec
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  RAILS_ENV: test
+  BUNDLE_FORCE_RUBY_PLATFORM: true
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: opensuse
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install vips
+      run: sudo apt-get install libvips42
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+
+    - name: Prepare environment
+      run: |
+        echo "127.0.0.1 db" | sudo tee /etc/hosts
+        cp config/database.sample.yml config/database.yml
+        cp config/site.sample.yml config/site.yml
+        cp config/storage.sample.yml config/storage.yml
+        bundler exec rails db:create
+        bundler exec rails db:migrate
+
+    - name: Run rspec
+      run: bundler exec rspec
