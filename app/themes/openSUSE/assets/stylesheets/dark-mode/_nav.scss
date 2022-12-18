@@ -1,0 +1,18 @@
+.nav {
+  &.nav-tabs {
+    border-color: $dark-mode-border-color;
+
+    .nav-link {
+      &.active,
+      &:hover {
+        border-color: $dark-mode-border-color;
+      }
+
+      &.active {
+        color: inherit;
+        background-color: $dark-mode-body-bg-color;
+        border-bottom-color: $dark-mode-body-bg-color;
+      }
+    }
+  }
+}

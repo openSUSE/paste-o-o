@@ -1,0 +1,29 @@
+.d-flex.justify-content-between.align-items-center
+  %h1= t(:auths)
+  = link_to t(:auth_new), new_auth_path, class: 'btn btn-primary'
+.list-group
+  - @auths.each do |auth|
+    .list-group-item
+      .row
+        .col-md-6.my-auto
+          = auth.name
+        .col-md-6.d-flex.align-items-center
+          .input-group{ data: { controller: 'clipboard',
+                        'clipboard-supported-class': 'clipboard-supported' } }
+            = tag.input type: 'text', value: auth.key, class: 'form-control',
+                        'data-clipboard-target': 'source', readonly: 'readonly'
+            = tag.button class: 'btn btn-secondary border btn-clipboard',
+                         'data-action': 'clipboard#copy',
+                         title: t(:copy_to_clipboard) do
+              %i.fas.fa-clipboard
+              .visually-hidden= t(:copy_to_clipboard)
+          .dropdown.ms-2
+            %button.btn.btn-secondary{ type: 'button', 'aria-expanded': 'false',
+                                       'data-bs-toggle': 'dropdown',
+                                       title: t(:options) }
+              %i.fas.fa-ellipsis-vertical
+              .visually-hidden= t(:options)
+            %ul.dropdown-menu.dropdown-menu-end
+              %li
+                = button_to t(:auth_remove), auth_path(auth), method: :delete,
+                            class: 'dropdown-item text-danger'

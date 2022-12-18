@@ -1,0 +1,29 @@
+shared:
+  program_name: openSUSE Paste
+
+test:
+  authentication:
+    openid_connect:
+      name: :suse
+
+development:
+
+production:
+  authentication:
+    openid_connect:
+      name: :oidc
+      scope:
+      - :openid
+      - :email
+      - :profile
+      response_type: :code
+      uid_field: preferred_username
+      client_options:
+        port: 443
+        scheme: https
+        host: id.opensuse.org
+        identifier: 
+        secret: 
+        redirect_uri: https://paste.opensuse.org/auth/oidc/callback
+  sign_up_link: https://idp-portal.suse.com/univention/self-service/#page=createaccount
+  theme: openSUSE

@@ -1,0 +1,109 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+  months:
+    one: a month
+    other: '%{count} months'
+  weeks:
+    one: a week
+    other: '%{count} weeks'
+  days:
+    one: a day
+    other: '%{count} days'
+  hours:
+    one: an hour
+    other: '%{count} hours'
+  minutes:
+    one: a minute
+    other: '%{count} minutes'
+  paste_title_html: "%{title} %{private} created by %{author} will expire in %{expires_in}"
+  adjective_animal: '%{adjective} %{animal}'
+  user_paste: "%{user}'s paste"
+  anonymous_paste: Anonymous paste
+  login: Log in
+  sign_up: Sign up
+  login_with: 'Log in with %{provider}'
+  create: Create
+  recent: Recent
+  save: Save
+  title: Title
+  created_by: Created by
+  remove_after: Remove after
+  private: Private
+  source_code: Source Code
+  license: License
+  paste_created: Paste was successfully created.
+  paste_failed: Paste failed to save.
+  paste_create: Paste was successfully created.
+  paste_destroyed: Paste was successfully destroyed.
+  paste_not_destroyed: No permissions to destroy the paste.
+  paste_not_found: Paste not found
+  pastes_list: Listing pastes
+  auths: Keys
+  auth_remove: Remove the key
+  auth_created: Key was successfully created.
+  auth_failed: Key failed to save.
+  auth_new: Create key
+  auth_create: Key was successfully created.
+  auth_destroyed: Key was successfully destroyed.
+  auth_not_destroyed: No permissions to destroy the key.
+  auth_not_found: Key not found
+  copy_to_clipboard: Copy to clipboard
+  copyright: © 2022 openSUSE Contributors
+  too_large: can't be larger than 2MB
+  too_long: can't be longer than %{time}
+  need_login: You need to log in before accessing that page
+  close: Close
+  login_success: Welcome back, traveller!
+  login_failure: Authentication failed. Please try again
+  logout_success: Logged out successfully
+  login_exists: You are already logged in
+  toggle_navigation: Toggle Navigation
+  my_pastes: My Pastes
+  my_keys: My Keys
+  logout: Log Out
+  no_attachment: No attachment
+  options: Options
+  save: Save
+  helpers:
+    label:
+      auth:
+        name: Name
+
+  helpers:
+    label:
+      paste:
+        title: Title
+        author: Created by
+        code: Code
+        private: Private
+        remove_after: Remove after

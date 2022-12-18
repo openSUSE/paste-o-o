@@ -1,0 +1,9 @@
+.list-group-item:not(.active) {
+  background-color: $dark-mode-body-bg-color;
+  border-color: $dark-mode-border-color;
+  color: $dark-mode-text-color;
+}
+
+.list-group-item-action:hover:not(.active) {
+  background-color: $dark-mode-bg-color;
+}

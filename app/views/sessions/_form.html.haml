@@ -1,0 +1,6 @@
+= form_tag("/auth/#{provider[:id]}", method: 'post', data: { turbo: false }) do
+  %button.btn.btn-primary{ type: 'submit' }
+    - if provider[:name]
+      = t(:login_with, provider: provider[:name])
+    - else
+      = t(:login)

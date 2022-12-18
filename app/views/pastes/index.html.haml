@@ -1,0 +1,5 @@
+%h1= t(:pastes_list)
+.list-group
+  - @pastes.each do |paste|
+    = link_to paste, class: 'list-group-item' do
+      = render 'pastes/title', paste:

@@ -1,0 +1,12 @@
+%h1= t(:auth_new)
+%div
+  = form_for @auth do |f|
+    - @auth.errors.full_messages.each do |message|
+      .alert.alert-danger
+        = message
+
+    .form-floating.mb-3
+      = f.text_field :name, placeholder: :title, class: 'form-control'
+      = f.label :name, class: 'form-label'
+    .d-flex.justify-content-end.align-items-center
+      = f.submit t(:save), class: 'btn btn-primary'

@@ -1,0 +1,10 @@
+.table {
+  th,
+  td {
+    border-bottom: $table-border-width $table-border-color solid;
+  }
+
+  thead th {
+    border-bottom-width: $table-border-width;
+  }
+}

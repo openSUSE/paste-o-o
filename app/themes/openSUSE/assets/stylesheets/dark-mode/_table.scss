@@ -1,0 +1,10 @@
+.table {
+  th,
+  td {
+    border-color: $dark-mode-table-border-color;
+    color: $dark-mode-text-color;
+  }
+  thead th {
+    border-color: $dark-mode-table-border-color;
+  }
+}

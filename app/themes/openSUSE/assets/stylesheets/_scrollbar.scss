@@ -1,0 +1,16 @@
+// Firefox
+* {
+  scrollbar-color: $scrollbar-thumb-color $scrollbar-color;
+  scrollbar-width: thin;
+}
+
+// Chrome
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  background: $scrollbar-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $scrollbar-thumb-color;
+}

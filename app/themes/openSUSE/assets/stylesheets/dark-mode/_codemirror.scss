@@ -1,0 +1,13 @@
+.cm-gutters {
+  background-color: $dark-mode-bg-color!important;
+  border-color: $dark-mode-border-color!important;
+}
+
+.cm-gutterElement.cm-activeLineGutter {
+  background-color: $info!important;
+  color: white!important;
+}
+
+.cm-selectionBackground {
+  background-color: $info!important;
+}

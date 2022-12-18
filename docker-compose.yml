@@ -1,0 +1,20 @@
+version: "2.1"
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: opensuse
+    ports:
+      - "5432:5432"
+  web:
+    image: paste-o-o/web
+    build:
+      dockerfile: docker-files/Dockerfile
+      args:
+        CONTAINER_USERID: 1000
+    volumes:
+      - .:/web:z
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db

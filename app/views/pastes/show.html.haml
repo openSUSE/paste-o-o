@@ -1,0 +1,15 @@
+.card
+  .card-header
+    .d-flex.justify-content-between.align-items-center
+      .info
+        = render 'pastes/title', paste: @paste
+      - if @paste.content.attachment
+        %ul.list-inline.m-0
+          %li.list-inline-item
+            = link_to 'Raw', @paste.content.attachment.url
+          - if user_signed_in? && @paste.user == current_user
+            %li.list-inline-item
+              = button_to t(:remove), paste_path(@paste), method: :delete,
+                          class: 'btn p-0 text-danger'
+  %div{ 'data-controller': 'editor', 'data-editor-read-only-value': 'true' }
+    = represent @paste.content.attachment

@@ -1,0 +1,45 @@
+%nav.navbar.navbar-expand-sm
+  .container-fluid
+    = render 'theme/brand'
+    %button.navbar-toggler{ 'data-bs': { target: '#navbar-content',
+                                         toggle: 'collapse' }, type: 'button',
+                            aria: { controls: 'navbar-content',
+                                    expanded: 'false',
+                                    label: t(:toggle_navigation) } }
+      %span.navbar-toggler-icon
+    .collapse.navbar-collapse#navbar-content
+      %ul.navbar-nav.me-auto
+        %li.nav-item
+          = link_to t(:create), new_paste_path, class: 'nav-link'
+        %li.nav-item
+          = link_to t(:recent), pastes_path, class: 'nav-link'
+      .navbar-nav
+        - if user_signed_in?
+          .dropdown.nav-item
+            %a.nav-link.dropdown-toggle{ 'aria-expanded': 'false', href: '#',
+                                         role: 'button',
+                                         'data-bs-toggle': 'dropdown' }
+              = avatar current_user
+              = current_user.username
+            %ul.dropdown-menu.dropdown-menu-end
+              %li
+                = link_to t(:my_pastes),
+                          pastes_path(user: current_user.username),
+                          class: 'dropdown-item'
+              %li
+                = link_to t(:my_keys), auths_path, class: 'dropdown-item'
+              %li
+                %hr.dropdown-divider
+              %li
+                = button_to t(:log_out), '/logout', method: :delete,
+                            class: 'dropdown-item text-danger'
+        - else
+          - auth = Rails.configuration.site[:authentication]
+          - if Rails.env.development?
+            = render 'sessions/form', provider: { id: 'developer',
+                                                  name: 'Developer' }
+          - auth&.each do |key, value|
+            = render 'sessions/form', provider: { id: value[:name] }
+          - if (sign_up_link = Rails.configuration.site[:sign_up_link])
+            = link_to t(:sign_up), sign_up_link,
+                      class: 'btn btn-primary ms-1 mt-1 mt-sm-0'

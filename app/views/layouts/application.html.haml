@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %meta{ content: 'text/html; charset=UTF-8', 'http-equiv': 'Content-Type' }
+    %title= Rails.configuration.site[:program_name]
+    %meta{ content: 'width=device-width,initial-scale=1', name: 'viewport' }
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = javascript_importmap_tags 'application'
+    = favicon_link_tag 'favicon.ico'
+  %body
+    = render partial: 'layouts/navbar'
+    .toast-container.position-fixed.bottom-0.end-0.p-3
+      - flash.each do |type, text|
+        - type = 'success' if type == 'notice'
+        - type = 'danger' if type == 'alert'
+        %div{ class: "toast align-items-center text-bg-#{type} border-0 show",
+              aria: { atomic: 'true', live: 'assertive' }, role: 'alert' }
+          .d-flex
+            .toast-body
+              = text
+            %button.btn-close.me-2.m-auto{ 'aria-label': t(:close),
+                                           'data-bs-dismiss': 'toast',
+                                           type: 'button' }
+    %main.flex-fill
+      .container.my-3
+        = yield
+    = render partial: 'layouts/footer'
