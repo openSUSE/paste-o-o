@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Sessions', type: :feature do
+RSpec.describe 'Sessions' do
   context 'when a user logs in' do
     before do
       OmniAuth.config.test_mode = true

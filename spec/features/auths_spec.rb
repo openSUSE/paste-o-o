@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Auths', type: :feature do
+RSpec.describe 'Auths' do
   context 'when an anonymous user' do
     it 'tries to access auth keys' do
       visit '/auths'

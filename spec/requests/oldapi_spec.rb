@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Oldapis', type: :request do
+RSpec.describe 'Oldapis' do
   describe 'POST /index' do
     let!(:paste) do
-      post '/', params: params
+      post('/', params:)
       response.redirect_url
     end
 
