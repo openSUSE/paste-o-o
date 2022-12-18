@@ -5,6 +5,10 @@ class AuthsController < ApplicationController
   before_action :authenticate
   before_action :set_auth, only: [:destroy]
 
+  def index
+    @auths = Auth.for_user(current_user)
+  end
+
   def new
     @auth = Auth.new
   end
@@ -19,10 +23,6 @@ class AuthsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def index
-    @auths = Auth.for_user(current_user)
   end
 
   def destroy

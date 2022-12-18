@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Pastes', type: :request do
+RSpec.describe 'Pastes' do
   describe 'POST /index' do
     let(:type) { :json }
     let!(:paste) do

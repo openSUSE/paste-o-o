@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Pastes', type: :feature do
+RSpec.describe 'Pastes' do
   context 'when an anonymous user creates a new paste' do
     it 'without entering any content' do
       visit '/'

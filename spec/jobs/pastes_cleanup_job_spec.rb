@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PastesCleanupJob, type: :job do
+RSpec.describe PastesCleanupJob do
   describe '#perform_later' do
     let(:time) { rand(3.months).seconds.from_now }
     let(:paste) do
