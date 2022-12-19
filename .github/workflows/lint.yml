@@ -1,4 +1,4 @@
-name: Run Rubocop
+name: Run Lints
 
 on:
   push:
@@ -23,3 +23,7 @@ jobs:
 
     - name: Run rubocop
       run: bundler exec rubocop
+
+
+    - name: Run haml-lint
+      run: bundler exec haml-lint

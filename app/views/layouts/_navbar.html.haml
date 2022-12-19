@@ -38,7 +38,7 @@
           - if Rails.env.development?
             = render 'sessions/form', provider: { id: 'developer',
                                                   name: 'Developer' }
-          - auth&.each do |key, value|
+          - auth&.each do |_, value|
             = render 'sessions/form', provider: { id: value[:name] }
           - if (sign_up_link = Rails.configuration.site[:sign_up_link])
             = link_to t(:sign_up), sign_up_link,
