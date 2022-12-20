@@ -17,8 +17,9 @@ body {
   border-bottom-left-radius: calc(var(--bs-border-radius) - var(--bs-border-width))
 }
 
-.cm-content, .cm-scroller, .cm-gutters, #paste_code {
+.cm-editor, .cm-content, .cm-scroller, .cm-gutters, #paste_code {
   min-height: 15rem !important;
+  height: 100% !important;
 }
 
 .card-body * {
