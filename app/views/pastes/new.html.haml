@@ -1,5 +1,5 @@
-%div.h-100{ data: { controller: 'editor',
-                    'editor-filled-class': 'file-field-filled' } }
+.h-100{ data: { controller: 'editor',
+                'editor-filled-class': 'file-field-filled' } }
   = form_for @paste, html: { 'data-action': 'editor#submit',
                              class: 'd-flex flex-column h-100' } do |f|
     - @paste.errors.full_messages.each do |message|
