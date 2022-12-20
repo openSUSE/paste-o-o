@@ -49,8 +49,7 @@ jobs:
     - name: Run rspec
       run: bundler exec rspec
 
-    - if: ${{ matrix.type == 'coverage' }}
-      name: Coveralls
+    - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
