@@ -30,6 +30,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+/config/credentials.yml.enc
+
 /config/site.yml
 /config/database.yml
 /config/storage.yml
