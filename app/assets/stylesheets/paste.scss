@@ -60,3 +60,15 @@ body {
 .clipboard-supported .btn-clipboard {
   display: initial;
 }
+
+.blur {
+  background-color: rgba(0,0,0,0.3);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  border-radius: 0 0 var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

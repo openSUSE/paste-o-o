@@ -8,20 +8,25 @@ export default class extends Controller {
   static classes = [ "filled" ]
   static values = { readOnly: { type: Boolean, default: false } }
 
-  initialize() {
+  textareaTargetConnected() {
     // CodeMirror setup, based on the existing TextArea
-    let extensions = [basicSetup];
-    if (this.readOnlyValue)
-      extensions.push(EditorState.readOnly.of(true));
-    view = new EditorView({extensions})
-    let value = this.textareaTarget.value;
-    let changes = [{ from: 0, insert: value }]
-    view.dispatch({changes});
-    this.textareaTarget.parentNode.insertBefore(view.dom, this.textareaTarget);
-    this.textareaTarget.style.display = "none";
+    // if TextArea has display: none, we assume this has been set up already
+    if (this.textareaTarget.style['display'] != 'none') {
+      let extensions = [basicSetup];
+      if (this.readOnlyValue)
+        extensions.push(EditorState.readOnly.of(true));
+      view = new EditorView({extensions})
+      let value = this.textareaTarget.value;
+      let changes = [{ from: 0, insert: value }]
+      view.dispatch({changes});
+      this.textareaTarget.parentNode.insertBefore(view.dom, this.textareaTarget);
+      this.textareaTarget.style.display = "none";
+    }
+  }
+
+  clearFileButtonTargetConnected() {
     // Hide the 'Clear' button next to File by default
-    if (this.hasClearFileButton)
-      this.clearFileButtonTarget.classList.add(this.filledClass);
+    this.clearFileButtonTarget.classList.add(this.filledClass);
   }
 
   connect() {
