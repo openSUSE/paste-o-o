@@ -12,13 +12,39 @@ body {
   border-bottom-left-radius: var(--bs-card-inner-border-radius)
 }
 
-.rounded .cm-gutters {
-  border-top-left-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
-  border-bottom-left-radius: calc(var(--bs-border-radius) - var(--bs-border-width))
+.rounded {
+  .cm-gutters {
+    border-top-left-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
+    border-bottom-left-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
+  }
+  .cm-panels {
+    @extend .card-footer;
+    @extend .border-top;
+    border-bottom-right-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
+    border-bottom-left-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
+  }
 }
 
 .cm-content, .cm-scroller, .cm-gutters, #paste_code {
   min-height: 15rem !important;
+}
+
+.cm-editor {
+  .cm-textfield {
+    @extend .form-control;
+    display: inline-block;
+    width: auto;
+  }
+  button.cm-button {
+    @extend .btn;
+    @extend .btn-primary;
+    background-image: none;
+  }
+  button[name="close"] {
+    font-size: 2rem!important;
+    padding: 0 0.75rem!important;
+    color: inherit;
+  }
 }
 
 .card-body * {
