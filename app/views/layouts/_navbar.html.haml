@@ -1,8 +1,9 @@
 %nav.navbar.navbar-expand-sm
   .container-fluid
     = render 'theme/brand'
-    %button.navbar-toggler{ 'data-bs': { target: '#navbar-content',
-                                         toggle: 'collapse' }, type: 'button',
+    %button.navbar-toggler{ data: { bs: { target: '#navbar-content',
+                                          toggle: 'collapse' } },
+                            type: 'button',
                             aria: { controls: 'navbar-content',
                                     expanded: 'false',
                                     label: t(:toggle_navigation) } }
