@@ -30,8 +30,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Install vips
-      run: sudo apt-get install libvips42
+    - name: Install preview generators
+      run: sudo apt-get install libvips42 poppler-utils
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.1'

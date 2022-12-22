@@ -100,6 +100,27 @@ RSpec.describe 'Pastes' do
       expect(page).to have_css('.card-body img')
     end
 
+    it 'with video file content' do
+      visit '/'
+      attach_file('paste_content', 'spec/fixtures/files/file.webm')
+      click_button 'Save'
+      expect(page).to have_css('.card-body video')
+    end
+
+    it 'with audio file content' do
+      visit '/'
+      attach_file('paste_content', 'spec/fixtures/files/file.flac')
+      click_button 'Save'
+      expect(page).to have_css('.card-body audio')
+    end
+
+    it 'with document file content' do
+      visit '/'
+      attach_file('paste_content', 'spec/fixtures/files/file.pdf')
+      click_button 'Save'
+      expect(page).to have_text('You can only see the full document, if you download it')
+    end
+
     it 'with unrepresentable file content' do
       visit '/'
       attach_file('paste_content', 'spec/fixtures/files/file.tar.xz')

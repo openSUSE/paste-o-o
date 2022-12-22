@@ -94,6 +94,8 @@ en:
   no_attachment: No attachment
   options: Options
   save: Save
+  download: Download
+  document_notice: You can only see the full document, if you download it
   helpers:
     label:
       auth:

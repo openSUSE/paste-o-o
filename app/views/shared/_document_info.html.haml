@@ -1,0 +1,6 @@
+= image_tag(representation_url(attachment))
+.blur
+  .card
+    .card-body.text-center
+      %p= t(:document_notice)
+      = link_to t(:download), attachment.url, class: 'btn btn-primary'
