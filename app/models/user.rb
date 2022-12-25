@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# The user details as provided by OmniAuth
 class User < ApplicationRecord
   has_many :pastes, dependent: :destroy
   has_many :auths, dependent: :destroy
