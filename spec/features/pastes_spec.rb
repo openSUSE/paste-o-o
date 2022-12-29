@@ -93,6 +93,13 @@ RSpec.describe 'Pastes' do
       expect(page).to have_text('🌶️ Hot')
     end
 
+    it 'with shell script file content' do
+      visit '/'
+      attach_file('paste_content', 'spec/fixtures/files/file.sh')
+      click_button 'Save'
+      expect(page).to have_text('echo "🌶️ Hot"')
+    end
+
     it 'with image file content' do
       visit '/'
       attach_file('paste_content', 'spec/fixtures/files/file.png')

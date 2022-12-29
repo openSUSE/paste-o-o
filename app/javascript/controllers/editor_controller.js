@@ -1,12 +1,14 @@
 import { Controller } from "@hotwired/stimulus"
-import {EditorView, basicSetup} from "codemirror"
-import {EditorState} from "@codemirror/state"
+import { EditorView, basicSetup } from "codemirror"
+import { EditorState, StateEffect } from "@codemirror/state"
+import { languages } from "@codemirror/language-data"
+import { oneDark } from "@codemirror/theme-one-dark"
 let view = {};
 
 export default class extends Controller {
   static targets = [ "textarea", "file", "form", "clearFileButton" ]
   static classes = [ "filled" ]
-  static values = { readOnly: { type: Boolean, default: false } }
+  static values = { readOnly: { type: Boolean, default: false }, extensions: Array }
 
   textareaTargetConnected() {
     // CodeMirror setup, based on the existing TextArea
@@ -21,6 +23,8 @@ export default class extends Controller {
       view.dispatch({changes});
       this.textareaTarget.parentNode.insertBefore(view.dom, this.textareaTarget);
       this.textareaTarget.style.display = "none";
+      this.setLanguage();
+      this.setMode();
     }
   }
 
@@ -73,5 +77,32 @@ export default class extends Controller {
     this.fileTarget.value = "";
     this.textareaTarget.parentNode.style.display = '';
     this.clearFileButtonTarget.classList.add(this.filledClass);
+  }
+
+  setMode() {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      view.dispatch({
+        effects: [StateEffect.appendConfig.of([ oneDark ])]
+      });
+    }
+  }
+
+  setLanguage() {
+    if (this.extensionsValue) {
+      let languageData = languages.find(
+        (lang) => lang.extensions.some(item => this.extensionsValue.includes(item))
+      );
+      if (languageData) {
+        this.setHighlighting(languageData).then(res => {
+          view.dispatch({
+            effects: [StateEffect.appendConfig.of([res])]
+          });
+        });
+      }
+    }
+  }
+
+  async setHighlighting(languageData) {
+    return await languageData.load();
   }
 }
