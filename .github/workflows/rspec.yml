@@ -31,7 +31,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install preview generators
-      run: sudo apt-get install libvips42 poppler-utils
+      run: sudo apt-get install libvips42 poppler-utils shared-mime-info
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.1'

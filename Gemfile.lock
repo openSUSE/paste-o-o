@@ -173,14 +173,14 @@ GEM
     loofah (2.19.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    mail (2.8.0)
+    mail (2.7.1)
       mini_mime (>= 0.1.1)
-      net-imap
-      net-pop
-      net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mimemagic (0.4.3)
+      nokogiri (~> 1)
+      rake
     mini_magick (4.12.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
@@ -408,6 +408,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails (~> 1.1)
   jbuilder
+  mimemagic
   omniauth
   omniauth-rails_csrf_protection
   omniauth_openid_connect

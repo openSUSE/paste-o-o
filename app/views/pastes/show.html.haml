@@ -11,5 +11,7 @@
             %li.list-inline-item
               = button_to t(:remove), paste_path(@paste), method: :delete,
                           class: 'btn p-0 text-danger'
-  %div{ 'data-controller': 'editor', 'data-editor-read-only-value': 'true' }
+  - exts = extensions(@paste.content.attachment)
+  %div{ 'data-controller': 'editor', data: { 'editor-read-only-value': 'true',
+                                             'editor-extensions-value': exts } }
     = represent @paste.content.attachment

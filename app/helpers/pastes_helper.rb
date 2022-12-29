@@ -13,6 +13,10 @@ module PastesHelper
     tag.span(text, class: 'badge text-bg-info')
   end
 
+  def extensions(attachment)
+    MimeMagic.new(attachment.content_type).extensions
+  end
+
   private
 
   def image(attachment)
@@ -38,16 +42,20 @@ module PastesHelper
                                                                   'data-editor-target': 'textarea'
   end
 
+  def text?(attachment)
+    MimeMagic.new(attachment.content_type).text?
+  end
+
   def media(attachment)
     return image(attachment) if attachment.image? && attachment.representable?
     return video(attachment) if attachment.video?
     return audio(attachment) if attachment.audio?
-    return text(attachment) if attachment.text?
+    return text(attachment) if text?(attachment)
     return document(attachment) if attachment.representable?
   end
 
   def media?(attachment)
-    attachment.representable? || attachment.image? || attachment.video? || attachment.audio? || attachment.text?
+    attachment.representable? || attachment.image? || attachment.video? || attachment.audio? || text?(attachment)
   end
 
   def representation_url(attachment)
