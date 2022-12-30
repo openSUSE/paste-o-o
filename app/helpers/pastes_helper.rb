@@ -14,7 +14,9 @@ module PastesHelper
   end
 
   def extensions(attachment)
-    MimeMagic.new(attachment.content_type).extensions
+    marcel = Marcel::Magic.new(attachment.content_type).extensions
+    mimemagic = MimeMagic.new(attachment.content_type).extensions
+    marcel + mimemagic
   end
 
   private
@@ -43,7 +45,7 @@ module PastesHelper
   end
 
   def text?(attachment)
-    MimeMagic.new(attachment.content_type).text?
+    Marcel::Magic.new(attachment.content_type).text? || MimeMagic.new(attachment.content_type).text?
   end
 
   def media(attachment)
