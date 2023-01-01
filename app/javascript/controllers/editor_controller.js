@@ -6,8 +6,8 @@ import { oneDark } from "@codemirror/theme-one-dark"
 let view = {};
 
 export default class extends Controller {
-  static targets = [ "textarea", "file", "form", "clearFileButton" ]
-  static classes = [ "filled" ]
+  static targets = [ "textarea", "file", "form", "clearFileButton", "fullSize" ]
+  static classes = [ "filled", "fullSize" ]
   static values = { readOnly: { type: Boolean, default: false }, extensions: Array }
 
   textareaTargetConnected() {
@@ -63,11 +63,11 @@ export default class extends Controller {
       let value = view.state.doc.toString();
       let changes = [{ from: 0, to: value.length, insert: '' }]
       view.dispatch({changes});
-      this.textareaTarget.parentNode.style.display = 'none';
+      this.textareaTarget.parentNode.parentNode.style.display = 'none';
       this.clearFileButtonTarget.classList.remove(this.filledClass);
     }
     else {
-      this.textareaTarget.parentNode.style.display = '';
+      this.textareaTarget.parentNode.parentNode.style.display = '';
       this.clearFileButtonTarget.classList.add(this.filledClass);
     }
   }
@@ -75,7 +75,7 @@ export default class extends Controller {
   clearFile() {
     // Clear File input after it was filled out
     this.fileTarget.value = "";
-    this.textareaTarget.parentNode.style.display = '';
+    this.textareaTarget.parentNode.parentNode.style.display = '';
     this.clearFileButtonTarget.classList.add(this.filledClass);
   }
 
@@ -104,5 +104,13 @@ export default class extends Controller {
 
   async setHighlighting(languageData) {
     return await languageData.load();
+  }
+
+  expand() {
+    this.fullSizeTarget.classList.add(this.fullSizeClass)
+  }
+
+  contract() {
+    this.fullSizeTarget.classList.remove(this.fullSizeClass)
   }
 }

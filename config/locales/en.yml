@@ -78,6 +78,7 @@ en:
   auth_not_destroyed: No permissions to destroy the key.
   auth_not_found: Key not found
   copy_to_clipboard: Copy to clipboard
+  copy_url_to_clipboard: Copy link to clipboard
   copyright: © 2022 openSUSE Contributors
   too_large: can't be larger than 2MB
   too_long: can't be longer than %{time}
@@ -96,6 +97,8 @@ en:
   save: Save
   download: Download
   document_notice: You can only see the full document, if you download it
+  expand: Expand
+  contract: Contract
   helpers:
     label:
       auth:

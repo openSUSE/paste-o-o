@@ -1,17 +1,35 @@
-.card
-  .card-header
-    .d-flex.justify-content-between.align-items-center
+- exts = extensions(@paste.content.attachment)
+.card{ data: { controller: 'editor',
+               'editor-read-only-value': 'true',
+               'editor-extensions-value': exts,
+               'editor-full-size-class': 'full-size',
+               'editor-target': 'fullSize' } }
+  .card-header.pe-1
+    .d-flex.justify-content-between.align-items-center.flex-wrap
       .info
         = render 'pastes/title', paste: @paste
       - if @paste.content.attachment
-        %ul.list-inline.m-0
+        %ul.list-inline.m-0.d-flex.align-items-center.ms-auto
+          %li.list-inline-item
+            .span{ data: { controller: 'clipboard' } }
+              = tag.input type: 'text', value: paste_url(@paste),
+                          class: 'visually-hidden', readonly: 'readonly',
+                          'data-clipboard-target': 'source'
+              = tag.button class: 'btn btn-link text-info p-0',
+                           'data-action': 'clipboard#copy',
+                           title: t(:copy_url_to_clipboard) do
+                = t(:copy_url_to_clipboard)
           %li.list-inline-item
             = link_to 'Raw', @paste.content.attachment.url
           - if user_signed_in? && @paste.user == current_user
             %li.list-inline-item
               = button_to t(:remove), paste_path(@paste), method: :delete,
                           class: 'btn p-0 text-danger'
-  - exts = extensions(@paste.content.attachment)
-  %div{ 'data-controller': 'editor', data: { 'editor-read-only-value': 'true',
-                                             'editor-extensions-value': exts } }
-    = represent @paste.content.attachment
+          %li.list-inline-item
+            %a.btn.btn-sm.btn-expand{ data: { action: 'editor#expand' },
+                                      title: t(:expand) }
+              %i.fas.fa-up-right-and-down-left-from-center
+            %a.btn.btn-sm.btn-contract{ data: { action: 'editor#contract' },
+                                        title: t(:contract) }
+              %i.fas.fa-down-left-and-up-right-to-center
+  = represent @paste.content.attachment

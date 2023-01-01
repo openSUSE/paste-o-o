@@ -8,11 +8,10 @@
         .col-md-6.my-auto
           = auth.name
         .col-md-6.d-flex.align-items-center
-          .input-group{ data: { controller: 'clipboard',
-                        'clipboard-supported-class': 'clipboard-supported' } }
+          .input-group{ data: { controller: 'clipboard' } }
             = tag.input type: 'text', value: auth.key, class: 'form-control',
                         'data-clipboard-target': 'source', readonly: 'readonly'
-            = tag.button class: 'btn btn-secondary border btn-clipboard',
+            = tag.button class: 'btn btn-secondary border',
                          'data-action': 'clipboard#copy',
                          title: t(:copy_to_clipboard) do
               %i.fas.fa-clipboard
