@@ -3,6 +3,9 @@
     background-color: $dark-mode-bg-color;
     color: $dark-mode-text-color;
   }
+  &:disabled {
+    background-color: $dark-mode-bg-color;
+  }
 }
 
 .border, .border-top, .cm-panels {

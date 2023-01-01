@@ -31,8 +31,9 @@ body {
 }
 
 .cm-editor {
-  border-bottom-right-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
-  border-bottom-left-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
+  border-radius: calc(var(--bs-border-radius) - var(--bs-border-width));
+  border-top-right-radius: 0;
+  flex: fit-content;
   .cm-textfield {
     @extend .form-control;
     display: inline-block;
@@ -84,14 +85,6 @@ body {
   }
 }
 
-.btn-clipboard {
-  display: none;
-}
-
-.clipboard-supported .btn-clipboard {
-  display: initial;
-}
-
 .blur {
   background-color: rgba(0,0,0,0.3);
   height: 100%;
@@ -102,4 +95,31 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn-contract {
+  display: none;
+}
+
+.full-size {
+  position: fixed;
+  max-height: 100vh;
+  min-width: 100vw;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 0!important;
+  border-radius: 0!important;
+  z-index: 1000;
+  .btn-expand {
+    display: none;
+  }
+  .btn-contract {
+    display: block;
+  }
+  .cm-gutters {
+    height: auto!important;
+    min-height: 100% !important;
+  }
 }

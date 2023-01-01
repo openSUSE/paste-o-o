@@ -1,5 +1,6 @@
 .h-100{ data: { controller: 'editor',
-                'editor-filled-class': 'file-field-filled' } }
+                'editor-filled-class': 'file-field-filled',
+                'editor-full-size-class': 'full-size' } }
   = form_for @paste, html: { 'data-action': 'editor#submit',
                              class: 'd-flex flex-column h-100' } do |f|
     - @paste.errors.full_messages.each do |message|
@@ -21,10 +22,19 @@
                               end
       = f.text_field :title, title_attrs
       = f.label :title, class: 'form-label'
-    .border.rounded.mb-3.flex-fill{ 'data-action': 'keydown->editor#hideFile' }
-      = f.text_area :code, placeholder: :contents_of_the_paste,
-                    class: 'form-control', 'data-editor-target': 'textarea'
-    .input-group.mb-3
+    .flex-fill{ data: { action: 'keydown->editor#hideFile' } }
+      .border.rounded.bg-body.d-flex.h-100{ 'data-editor-target': 'fullSize' }
+        = f.text_area :code, placeholder: :contents_of_the_paste,
+                      class: 'form-control border-0 rounded-0 rounded-bottom',
+                      'data-editor-target': 'textarea'
+        .float-end.sticky-top
+          %a.btn.btn-sm.btn-expand{ data: { action: 'editor#expand' },
+                                         title: t(:expand) }
+            %i.fas.fa-up-right-and-down-left-from-center
+          %a.btn.btn-sm.btn-contract{ data: { action: 'editor#contract' },
+                                           title: t(:contract) }
+            %i.fas.fa-down-left-and-up-right-to-center
+    .input-group.mt-3
       = f.file_field :content, class: 'form-control',
                      data: { 'editor-target': 'file',
                              action: 'editor#hideText' }
@@ -32,7 +42,7 @@
         %a.btn.btn-secondary.border{ data: { 'editor-target': 'clearFileButton',
                                              action: 'editor#clearFile' } }
           Clear
-    .d-flex.justify-content-between.align-items-center
+    .d-flex.justify-content-between.align-items-center.mt-3
       .form-check
         = f.check_box :private, class: 'form-check-input'
         = f.label :private, class: 'form-check-label'

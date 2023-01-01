@@ -16,7 +16,7 @@ module PastesHelper
   def extensions(attachment)
     marcel = Marcel::Magic.new(attachment.content_type).extensions
     mimemagic = MimeMagic.new(attachment.content_type).extensions
-    marcel + mimemagic
+    (marcel + mimemagic).uniq
   end
 
   private
@@ -39,9 +39,11 @@ module PastesHelper
   end
 
   def text(attachment)
-    tag.textarea attachment.open(&:read).force_encoding('utf-8'), disabled: true, id: 'paste_code',
-                                                                  class: 'form-control',
-                                                                  'data-editor-target': 'textarea'
+    content = attachment.open(&:read).force_encoding('utf-8')
+    tag.textarea content, disabled: true, id: 'paste_code',
+                          class: 'form-control border-0 rounded-0 rounded-bottom',
+                          'data-editor-target': 'textarea',
+                          rows: content.lines.count
   end
 
   def text?(attachment)

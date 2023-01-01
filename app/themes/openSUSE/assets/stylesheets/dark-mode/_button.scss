@@ -1,3 +1,7 @@
+.btn {
+  color: $dark-mode-text-color;
+}
+
 .btn-secondary {
   @include button-variant($dark-mode-secondary, $dark-mode-secondary);
 }
