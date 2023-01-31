@@ -36,9 +36,9 @@ class OldapiController < ApplicationController
   end
 
   def remove_after(expire)
-    return expire.to_i.days.seconds.to_i if expire
+    return expire.to_i.hours.seconds.to_i if expire
 
-    60.days.seconds.to_i
+    60.hours.seconds.to_i
   end
 
   def ensure_presence(params)
