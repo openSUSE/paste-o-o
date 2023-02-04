@@ -28,9 +28,6 @@ class Paste < ApplicationRecord
 
   # Avoiding the case of showing anonymous users' private pastes to anonymous users
   scope :by_author, ->(user) { where(user:).where.not(user: nil) }
-  scope :all_public, -> { where(private: false) }
-  # All the pastes that a logged in or non logged in user should be able to see
-  scope :for_user, ->(current_user) { all_public.or(Paste.by_author(current_user)) }
 
   def to_param
     permalink

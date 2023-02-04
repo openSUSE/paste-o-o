@@ -3,7 +3,6 @@
 # The omniauth handling
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
-  before_action :authenticate, only: [:destroy]
 
   def create
     auth = Auth.from_omniauth(request.env['omniauth.auth'])

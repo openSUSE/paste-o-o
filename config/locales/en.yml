@@ -99,6 +99,8 @@ en:
   document_notice: You can only see the full document, if you download it
   expand: Expand
   contract: Contract
+  remove: Remove
+  not_authorized: You are not authorized to perform this action.
   helpers:
     label:
       auth:

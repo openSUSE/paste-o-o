@@ -29,9 +29,8 @@ class OldapiController < ApplicationController
     params.permit(:code, :title, :expire, :name, :file, :submit, :lang, :api_key)
     opts = params.slice(:code, :title)
     opts.merge!(ensure_presence({ author: params[:name], content: params[:file],
+                                  auth_key: params[:api_key],
                                   remove_after: remove_after(params[:expire]) }))
-    # It's probably better to ignore the old keys
-    # opts[:auth_key] = params[:api_key]
     opts.permit(:code, :title, :remove_after, :author, :content)
   end
 

@@ -6,7 +6,7 @@ RSpec.describe 'Auths' do
   context 'when an anonymous user' do
     it 'tries to access auth keys' do
       visit '/auths'
-      expect(page).to have_text('You need to log in before accessing that page')
+      expect(page).to have_text('You are not authorized to perform this action.')
     end
   end
 
@@ -47,8 +47,7 @@ RSpec.describe 'Auths' do
     it 'removes the auth the user is logged in as' do
       visit '/auths'
       click_on 'Options'
-      click_button 'Remove the key'
-      expect(page).to have_text('You need to log in before accessing that page')
+      expect(page).not_to have_text('Remove the key')
     end
   end
 end
