@@ -23,6 +23,7 @@
               %i.fas.fa-ellipsis-vertical
               .visually-hidden= t(:options)
             %ul.dropdown-menu.dropdown-menu-end
-              %li
-                = button_to t(:auth_remove), auth_path(auth), method: :delete,
-                            class: 'dropdown-item text-danger'
+              - unless auth.id == session[:auth_id]
+                %li
+                  = button_to t(:auth_remove), auth_path(auth), method: :delete,
+                              class: 'dropdown-item text-danger'

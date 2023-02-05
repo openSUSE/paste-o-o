@@ -2,6 +2,9 @@
 
 # The primary controller in the application
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   protected
 
   def current_user
@@ -16,7 +19,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def authenticate
-    redirect_to root_path, alert: t(:need_login) unless user_signed_in?
+  def user_not_authorized
+    flash[:alert] = t(:not_authorized)
+    redirect_back(fallback_location: root_path)
   end
 end
