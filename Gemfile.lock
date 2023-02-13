@@ -231,7 +231,7 @@ GEM
     pg (1.4.5)
     popper_js (2.11.6)
     public_suffix (5.0.1)
-    puma (6.0.2)
+    puma (6.1.0)
       nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
@@ -421,7 +421,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   omniauth_openid_connect
   pg (~> 1.1)
-  puma (~> 6.0)
+  puma (~> 6.1)
   pundit (~> 2.3)
   rails (~> 7.0.4)
   rspec-rails
