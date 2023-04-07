@@ -74,7 +74,7 @@ gem 'pundit', '~> 2.3'
 gem 'faker'
 
 # Sidekiq for ActiveJob backend
-gem 'sidekiq'
+gem 'sidekiq', '>= 7.0.8'
 
 # Detection of mime types
 gem 'mimemagic'
