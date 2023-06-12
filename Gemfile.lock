@@ -98,7 +98,7 @@ GEM
       popper_js (>= 2.11.6, < 3)
       sassc-rails (>= 2.0.0)
     builder (3.2.4)
-    capybara (3.39.1)
+    capybara (3.39.2)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -236,7 +236,7 @@ GEM
       nio4r (~> 2.0)
     pundit (2.3.0)
       activesupport (>= 3.0.0)
-    racc (1.6.2)
+    racc (1.7.0)
     rack (2.2.7)
     rack-oauth2 (2.2.0)
       activesupport
@@ -280,7 +280,7 @@ GEM
     rake (13.0.6)
     redis-client (0.14.1)
       connection_pool
-    regexp_parser (2.8.0)
+    regexp_parser (2.8.1)
     reline (0.3.4)
       io-console (~> 0.5)
     rexml (3.2.5)
