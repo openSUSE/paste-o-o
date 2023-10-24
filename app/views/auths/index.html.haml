@@ -25,5 +25,6 @@
             %ul.dropdown-menu.dropdown-menu-end
               - unless auth.id == session[:auth_id]
                 %li
-                  = button_to t(:auth_remove), auth_path(auth), method: :delete,
+                  = button_to t(:auth_remove), auth_path(auth),
+                              method: :delete,
                               class: 'dropdown-item text-danger'
