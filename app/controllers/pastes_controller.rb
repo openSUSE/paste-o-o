@@ -18,7 +18,9 @@ class PastesController < ApplicationController
               end
   end
 
-  def show; end
+  def show
+    authorize @paste
+  end
 
   def new
     @paste = authorize Paste.new
@@ -39,6 +41,8 @@ class PastesController < ApplicationController
   end
 
   def destroy
+    authorize @paste
+
     @paste.destroy
 
     respond_to do |format|
@@ -50,7 +54,7 @@ class PastesController < ApplicationController
   private
 
   def set_paste
-    @paste = authorize Paste.find_by(permalink: params[:permalink])
+    @paste = Paste.find_by(permalink: params[:permalink])
 
     redirect_to pastes_url, alert: t(:paste_not_found) unless @paste
   end
