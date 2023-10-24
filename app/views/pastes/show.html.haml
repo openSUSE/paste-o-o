@@ -23,7 +23,8 @@
             = link_to 'Raw', @paste.content.attachment.url
           - if policy(@paste).destroy?
             %li.list-inline-item
-              = button_to t(:remove), paste_path(@paste), method: :delete,
+              = button_to t(:remove), paste_path(@paste),
+                          method: :delete,
                           class: 'btn p-0 text-danger'
           %li.list-inline-item
             %a.btn.btn-sm.btn-expand{ data: { action: 'editor#expand' },

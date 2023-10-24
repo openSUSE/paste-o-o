@@ -16,26 +16,28 @@
       :ruby
         title_attrs = { placeholder: :title, class: 'form-control' }
         title_attrs[:value] = if user_signed_in?
-                                t(:user_paste, user: current_user.username)
-                              else
-                                t(:anonymous_paste)
-                              end
+          t(:user_paste, user: current_user.username)
+        else
+          t(:anonymous_paste)
+        end
       = f.text_field :title, title_attrs
       = f.label :title, class: 'form-label'
     .flex-fill{ data: { action: 'keydown->editor#hideFile' } }
       .border.rounded.bg-body.d-flex.h-100{ 'data-editor-target': 'fullSize' }
-        = f.text_area :code, placeholder: :contents_of_the_paste,
+        = f.text_area :code,
+                      placeholder: :contents_of_the_paste,
                       class: 'form-control border-0 rounded-0 rounded-bottom',
                       'data-editor-target': 'textarea'
         .float-end.sticky-top
           %a.btn.btn-sm.btn-expand{ data: { action: 'editor#expand' },
-                                         title: t(:expand) }
+                                    title: t(:expand) }
             %i.fas.fa-up-right-and-down-left-from-center
           %a.btn.btn-sm.btn-contract{ data: { action: 'editor#contract' },
-                                           title: t(:contract) }
+                                      title: t(:contract) }
             %i.fas.fa-down-left-and-up-right-to-center
     .input-group.mt-3
-      = f.file_field :content, class: 'form-control',
+      = f.file_field :content,
+                     class: 'form-control',
                      data: { 'editor-target': 'file',
                              action: 'editor#hideText' }
       #file-remove-button
@@ -49,6 +51,6 @@
       .d-flex.justify-content-between
         .form-floating.ms-1
           = f.select :remove_after, Paste::PERIODS, { selected: 1.day },
-                                                   { class: 'form-select' }
+                     { class: 'form-select' }
           = f.label :remove_after, class: 'form-label'
         = f.submit t(:save), class: 'btn btn-primary btn-lg ms-2'
