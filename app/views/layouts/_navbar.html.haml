@@ -1,12 +1,12 @@
 %nav.navbar.navbar-expand-sm
   .container-fluid
     = render 'theme/brand'
-    %button.navbar-toggler{data: { bs: { target: '#navbar-content',
-                                         toggle: 'collapse' } },
-                           type: 'button',
-                           aria: { controls: 'navbar-content',
-                                   expanded: 'false',
-                                   label: t(:toggle_navigation) }}
+    %button.navbar-toggler{ data: { bs: { target: '#navbar-content',
+                                          toggle: 'collapse' } },
+                            type: 'button',
+                            aria: { controls: 'navbar-content',
+                                    expanded: 'false',
+                                    label: t(:toggle_navigation) } }
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#navbar-content
       %ul.navbar-nav.me-auto
@@ -17,9 +17,9 @@
       .navbar-nav
         - if user_signed_in?
           .dropdown.nav-item
-            %a.nav-link.dropdown-toggle{'aria-expanded': 'false', href: '#',
-                                        role: 'button',
-                                        'data-bs-toggle': 'dropdown'}
+            %a.nav-link.dropdown-toggle{ 'aria-expanded': 'false', href: '#',
+                                         role: 'button',
+                                         'data-bs-toggle': 'dropdown' }
               = avatar current_user
               = current_user.username
             %ul.dropdown-menu.dropdown-menu-end

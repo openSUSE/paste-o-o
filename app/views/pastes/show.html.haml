@@ -1,9 +1,9 @@
 - exts = extensions(@paste.content.attachment)
-.card{data: { controller: 'editor',
-              'editor-read-only-value': 'true',
-              'editor-extensions-value': exts,
-              'editor-full-size-class': 'full-size',
-              'editor-target': 'fullSize' }}
+.card{ data: { controller: 'editor',
+               'editor-read-only-value': 'true',
+               'editor-extensions-value': exts,
+               'editor-full-size-class': 'full-size',
+               'editor-target': 'fullSize' } }
   .card-header.pe-1
     .d-flex.justify-content-between.align-items-center.flex-wrap
       .info
@@ -27,10 +27,10 @@
                           method: :delete,
                           class: 'btn p-0 text-danger'
           %li.list-inline-item
-            %a.btn.btn-sm.btn-expand{data: { action: 'editor#expand' },
-                                     title: t(:expand)}
+            %a.btn.btn-sm.btn-expand{ data: { action: 'editor#expand' },
+                                      title: t(:expand) }
               %i.fas.fa-up-right-and-down-left-from-center
-            %a.btn.btn-sm.btn-contract{data: { action: 'editor#contract' },
-                                       title: t(:contract)}
+            %a.btn.btn-sm.btn-contract{ data: { action: 'editor#contract' },
+                                        title: t(:contract) }
               %i.fas.fa-down-left-and-up-right-to-center
   = represent @paste.content.attachment
