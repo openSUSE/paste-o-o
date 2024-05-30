@@ -21,3 +21,7 @@ AllCops:
     - 'script/**/*'
     - 'bin/*'
     - 'vendor/**/*'
+
+Layout/SpaceInsideParens:
+  Exclude:
+    - "**/*.haml"

@@ -11,6 +11,7 @@ RSpec.describe PastesCleanupJob do
 
     before do
       ActiveJob::Base.queue_adapter = :test
+      freeze_time
     end
 
     it 'enqueues the paste removal' do

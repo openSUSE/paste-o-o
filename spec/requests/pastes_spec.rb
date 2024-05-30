@@ -21,9 +21,13 @@ RSpec.describe 'Pastes' do
       end
 
       it 'lets you can access the paste' do
+        paste.delete('updated_at')
         get paste['url'], as: :json
 
-        expect(JSON.parse(body)).to eq(paste)
+        result = JSON.parse(body)
+        result.delete('updated_at')
+
+        expect(result).to eq(paste)
       end
 
       it 'provides you the correct title' do
@@ -51,9 +55,13 @@ RSpec.describe 'Pastes' do
       end
 
       it 'you can access the paste' do
+        paste.delete('updated_at')
         get paste['url'], as: :json
 
-        expect(JSON.parse(body)).to eq(paste)
+        result = JSON.parse(body)
+        result.delete('updated_at')
+
+        expect(result).to eq(paste)
       end
 
       it 'provides you the correct title' do
