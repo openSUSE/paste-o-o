@@ -15,7 +15,7 @@ RSpec.describe 'Auths' do
       OmniAuth.config.test_mode = true
       OmniAuth.config.add_mock(:suse, { uid: '12345', info: { email: 'test@opensuse.org', nickname: 'testing' } })
       visit '/'
-      click_button 'Log in'
+      click_link_or_button 'Log in'
     end
 
     it 'tries to access auth keys' do
@@ -28,7 +28,7 @@ RSpec.describe 'Auths' do
         visit '/auths'
         click_on 'Create key'
         fill_in 'auth_name', with: 'new_auth'
-        click_button 'Save'
+        click_link_or_button 'Save'
       end
 
       it 'creates auth key with correct data' do
@@ -38,7 +38,7 @@ RSpec.describe 'Auths' do
       it 'removes the additional auth' do
         within all('.list-group-item .dropdown').last do
           click_on 'Options'
-          click_button 'Remove the key'
+          click_link_or_button 'Remove the key'
         end
         expect(page).to have_text('Key was successfully destroyed.')
       end
@@ -47,7 +47,7 @@ RSpec.describe 'Auths' do
     it 'removes the auth the user is logged in as' do
       visit '/auths'
       click_on 'Options'
-      expect(page).not_to have_text('Remove the key')
+      expect(page).to have_no_text('Remove the key')
     end
   end
 end

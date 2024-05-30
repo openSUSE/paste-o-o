@@ -15,14 +15,14 @@
       - flash.each do |type, text|
         - type = 'success' if type == 'notice'
         - type = 'danger' if type == 'alert'
-        %div{ class: "toast align-items-center text-bg-#{type} border-0 show",
-              aria: { atomic: 'true', live: 'assertive' }, role: 'alert' }
+        %div{class: "toast align-items-center text-bg-#{type} border-0 show",
+             aria: { atomic: 'true', live: 'assertive' }, role: 'alert'}
           .d-flex
             .toast-body
               = text
-            %button.btn-close.me-2.m-auto{ 'aria-label': t(:close),
-                                           'data-bs-dismiss': 'toast',
-                                           type: 'button' }
+            %button.btn-close.me-2.m-auto{'aria-label': t(:close),
+                                          'data-bs-dismiss': 'toast',
+                                          type: 'button'}
     %main.flex-fill.d-flex.h-100
       .container.my-3.flex-fill
         = yield

@@ -55,7 +55,8 @@ module PastesHelper
     return video(attachment) if attachment.video?
     return audio(attachment) if attachment.audio?
     return text(attachment) if text?(attachment)
-    return document(attachment) if attachment.representable?
+
+    document(attachment) if attachment.representable?
   end
 
   def media?(attachment)

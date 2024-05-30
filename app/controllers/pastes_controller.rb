@@ -8,7 +8,7 @@ class PastesController < ApplicationController
   after_action :verify_policy_scoped, only: :index
   # Set up activestorage for development
   before_action -> { ActiveStorage::Current.url_options = { host: request.base_url } },
-                if: -> { Rails.env.development? || Rails.env.test? }
+                if: -> { Rails.env.local? }
 
   def index
     @pastes = if params[:user]

@@ -1,6 +1,6 @@
-.h-100{ data: { controller: 'editor',
-                'editor-filled-class': 'file-field-filled',
-                'editor-full-size-class': 'full-size' } }
+.h-100{data: { controller: 'editor',
+               'editor-filled-class': 'file-field-filled',
+               'editor-full-size-class': 'full-size' }}
   = form_for @paste, html: { 'data-action': 'editor#submit',
                              class: 'd-flex flex-column h-100' } do |f|
     - @paste.errors.full_messages.each do |message|
@@ -29,11 +29,11 @@
                       class: 'form-control border-0 rounded-0 rounded-bottom',
                       'data-editor-target': 'textarea'
         .float-end.sticky-top
-          %a.btn.btn-sm.btn-expand{ data: { action: 'editor#expand' },
-                                    title: t(:expand) }
+          %a.btn.btn-sm.btn-expand{data: { action: 'editor#expand' },
+                                   title: t(:expand)}
             %i.fas.fa-up-right-and-down-left-from-center
-          %a.btn.btn-sm.btn-contract{ data: { action: 'editor#contract' },
-                                      title: t(:contract) }
+          %a.btn.btn-sm.btn-contract{data: { action: 'editor#contract' },
+                                     title: t(:contract)}
             %i.fas.fa-down-left-and-up-right-to-center
     .input-group.mt-3
       = f.file_field :content,
@@ -41,8 +41,8 @@
                      data: { 'editor-target': 'file',
                              action: 'editor#hideText' }
       #file-remove-button
-        %a.btn.btn-secondary.border{ data: { 'editor-target': 'clearFileButton',
-                                             action: 'editor#clearFile' } }
+        %a.btn.btn-secondary.border{data: { 'editor-target': 'clearFileButton',
+                                            action: 'editor#clearFile' }}
           Clear
     .d-flex.justify-content-between.align-items-center.mt-3
       .form-check

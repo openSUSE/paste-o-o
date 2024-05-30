@@ -8,7 +8,7 @@ RSpec.describe 'Sessions' do
       OmniAuth.config.test_mode = true
       OmniAuth.config.add_mock(:suse, { uid: '12345', info: { email: 'test@opensuse.org', nickname: 'testing' } })
       visit '/'
-      click_button 'Log in'
+      click_link_or_button 'Log in'
     end
 
     it 'can see their username' do
@@ -29,8 +29,8 @@ RSpec.describe 'Sessions' do
 
     it 'can log out' do
       click_on 'testing'
-      click_button 'Log Out'
-      expect(page).not_to have_text('testing')
+      click_link_or_button 'Log Out'
+      expect(page).to have_no_text('testing')
     end
   end
 end
