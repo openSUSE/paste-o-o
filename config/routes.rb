@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :pastes, only: %w[new create index show destroy], param: :permalink
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  get '/up' => 'rails/health#show'
+
   # Omniauth support
   post '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/:provider/callback', to: 'sessions#create'
