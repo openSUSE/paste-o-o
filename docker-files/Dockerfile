@@ -1,7 +1,7 @@
-FROM registry.opensuse.org/opensuse/leap:15.4
+FROM registry.opensuse.org/opensuse/leap:15.5
 ARG CONTAINER_USERID
 
-RUN zypper ar https://download.opensuse.org/repositories/devel:/languages:/ruby/15.4/ ruby
+RUN zypper ar https://download.opensuse.org/repositories/devel:/languages:/ruby/15.5/ ruby
 RUN zypper --gpg-auto-import-keys --non-interactive in --no-recommends ruby3.1-devel "rubygem(bundler)" sudo postgresql-devel make gcc-c++ zlib-devel libxml2-devel libxslt-devel libffi-devel nodejs libgobject-2_0-0 libvips42 poppler-tools ffmpeg-4 tar xz patch
 
 RUN useradd -g users -p opensuse -d /home/web -m web
