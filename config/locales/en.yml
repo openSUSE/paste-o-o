@@ -79,7 +79,7 @@ en:
   auth_not_found: Key not found
   copy_to_clipboard: Copy to clipboard
   copy_url_to_clipboard: Copy link to clipboard
-  copyright: © 2023 openSUSE Contributors
+  copyright: © 2023-2024 openSUSE Contributors
   too_large: can't be larger than 2MB
   too_long: can't be longer than %{time}
   need_login: You need to log in before accessing that page
