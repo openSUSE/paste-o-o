@@ -1,6 +1,12 @@
 // Firefox
 * {
-  scrollbar-color: $scrollbar-thumb-color $scrollbar-color;
+  --scrollbar-thumb-color: #{$scrollbar-thumb-color-light};
+
+  @include color-mode(dark) {
+    --scrollbar-thumb-color: #{$scrollbar-thumb-color-dark};
+  }
+
+  scrollbar-color: var(--scrollbar-thumb-color) $scrollbar-color;
   scrollbar-width: thin;
 }
 
@@ -12,5 +18,5 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $scrollbar-thumb-color;
+  background: var(--scrollbar-thumb-color);
 }

@@ -1,5 +1,5 @@
 .navbar {
-  background: $light;
+  background: var(--bs-secondary-bg);
   border-bottom: 2px solid $green;
 
   &.navbar-transparent {
@@ -8,52 +8,11 @@
   }
 
   .navbar-brand {
-    color: $navbar-light-brand-color;
     display: inline-flex;
 
     img {
+      align-self: center;
       margin-right: $spacer/2;
-    }
-
-    &:hover, &:focus {
-      color: $navbar-light-brand-hover-color;
-    }
-  }
-
-  .navbar-nav {
-    .nav-link {
-      color: $navbar-light-color;
-
-      &:hover, &:focus {
-        color: $navbar-light-hover-color;
-      }
-
-      &.disabled {
-        color: $navbar-light-disabled-color;
-      }
-    }
-
-    .show > .nav-link,
-    .active > .nav-link,
-    .nav-link.show,
-    .nav-link.active {
-      color: $navbar-light-active-color;
-    }
-  }
-
-  .navbar-toggler {
-    color: $navbar-light-color;
-    border-color: $navbar-light-toggler-border-color;
-  }
-
-  .navbar-text {
-    color: $navbar-light-color;
-    a {
-      color: $navbar-light-active-color;
-
-      &:hover, &:focus {
-        color: $navbar-light-active-color;
-      }
     }
   }
 
@@ -63,12 +22,6 @@
 
   .btn-secondary {
     border: 0;
-    background-color: $white;
-    color: $navbar-light-color;
-
-    &:hover, &:focus {
-      color: $navbar-light-hover-color;
-    }
   }
 
   .avatar {

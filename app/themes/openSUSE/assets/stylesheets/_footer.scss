@@ -1,7 +1,5 @@
-.global-footer, // Deprecated
-.site-footer, // Deprecated
 .footer {
   padding: 30px 0;
-  color: $gray-600;
-  background: $gray-100;
+  color: $text-muted;
+  background: var(--bs-secondary-bg);
 }
