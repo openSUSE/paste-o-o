@@ -54,7 +54,7 @@ class PastesController < ApplicationController
   def raw
     authorize @paste, :show?
 
-    redirect_to @paste.content.attachment.url
+    redirect_to @paste.content.attachment.url, allow_other_host: true
   end
 
   private
