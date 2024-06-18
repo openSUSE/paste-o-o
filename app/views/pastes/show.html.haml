@@ -20,7 +20,7 @@
                            title: t(:copy_url_to_clipboard) do
                 = t(:copy_url_to_clipboard)
           %li.list-inline-item
-            = link_to 'Raw', @paste.content.attachment.url
+            = link_to 'Raw', paste_raw_path(@paste)
           - if policy(@paste).destroy?
             %li.list-inline-item
               = button_to t(:remove), paste_path(@paste),

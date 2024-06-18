@@ -38,7 +38,7 @@ $colors: (
 
 // Bootstrap colors
 $primary: $teal;
-$secondary: $gray-200;
+$secondary: $gray-400;
 $success: $green;
 $info: $blue;
 $warning: $yellow;
@@ -52,10 +52,12 @@ $body-color: $black;
 
 // Links
 $link-color: $blue;
+$link-color-dark: $blue;
 
 // Scrollbars
 $scrollbar-color: transparent;
-$scrollbar-thumb-color: rgba(0, 0, 0, 0.2);
+$scrollbar-thumb-color-light: rgba(0, 0, 0, 0.2);
+$scrollbar-thumb-color-dark: rgba(255, 255, 255, 0.2);
 
 // Options
 
@@ -101,3 +103,5 @@ $dropdown-link-hover-bg: $blue;
 $dropdown-link-active-color: $white;
 $dropdown-link-active-bg: darken($blue, 5%);
 $dropdown-link-disabled-color: $gray-500;
+
+$color-mode-type: media-query;

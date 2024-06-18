@@ -1,0 +1,21 @@
+.cm-editor {
+  background-color: var(--bs-body-bg)!important;
+}
+
+.cm-gutters {
+  background-color: var(--bs-secondary-bg)!important;
+  border-color: var(--bs-border-color)!important;
+}
+
+.cm-gutterElement.cm-activeLineGutter {
+  background-color: $info!important;
+  color: white;
+}
+
+.cm-selectionBackground {
+  background-color: $info!important;
+}
+
+.cm-panels {
+  border-color: var(--bs-border-color)!important;
+}

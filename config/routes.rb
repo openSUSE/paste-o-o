@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :pastes, only: %w[new create index show destroy], param: :permalink
+  resources :pastes, only: %w[new create index show destroy], param: :permalink do
+    get :raw
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get '/up' => 'rails/health#show'

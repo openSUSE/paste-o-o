@@ -3,7 +3,7 @@
 # The endpoints and pages for pastes
 # TODO: Implement authentication from the outside
 class PastesController < ApplicationController
-  before_action :set_paste, only: %i[show destroy]
+  before_action :set_paste, only: %i[show destroy raw]
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
   # Set up activestorage for development
@@ -51,10 +51,16 @@ class PastesController < ApplicationController
     end
   end
 
+  def raw
+    authorize @paste, :show?
+
+    redirect_to @paste.content.attachment.url
+  end
+
   private
 
   def set_paste
-    @paste = Paste.find_by(permalink: params[:permalink])
+    @paste = Paste.find_by(permalink: params[:paste_permalink] || params[:permalink])
 
     redirect_to pastes_url, alert: t(:paste_not_found) unless @paste
   end

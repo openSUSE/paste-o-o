@@ -4,7 +4,6 @@
 @import "bootstrap";
 @import 'paste';
 
-@import "animate";
 @import "alert";
 @import "button-input-fonts";
 @import "card";
@@ -16,11 +15,9 @@
 @import "footer";
 @import "scrollbar";
 @import "table";
+@import "codemirror";
 
 // Additional styles, not from Bootstrap
 @import "body";
 @import "megamenu";
 @import "toc";
-
-// Dark mode
-@import "dark-mode/index";
