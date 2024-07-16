@@ -101,6 +101,9 @@ en:
   contract: Contract
   remove: Remove
   not_authorized: You are not authorized to perform this action.
+  spam: Spam
+  ham: Not Spam
+  unclassified: Unknown if spam
   helpers:
     label:
       auth:
