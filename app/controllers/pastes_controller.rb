@@ -4,6 +4,7 @@
 # TODO: Implement authentication from the outside
 class PastesController < ApplicationController
   before_action :set_paste, only: %i[show destroy raw]
+  before_action :qualify_content, only: :create
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
   # Set up activestorage for development
@@ -27,7 +28,7 @@ class PastesController < ApplicationController
   end
 
   def create
-    @paste = authorize Paste.new(paste_params)
+    @paste = authorize Paste.new(paste_params.merge({ marked_kind: @marked_kind }.compact))
 
     respond_to do |format|
       if @paste.save
@@ -83,5 +84,25 @@ class PastesController < ApplicationController
 
   def pastes_params
     params.require(:pastes).permit(:marked_kinds, ids: [])
+  end
+
+  def qualify_content
+    return unless text_content
+
+    classifier = Rails.application.config.classifier
+    @marked_kind = classifier.classify(text_content).downcase
+  end
+
+  def text?
+    return unless paste_params[:content].present?
+
+    content_type = paste_params[:content].content_type
+    Marcel::Magic.new(content_type).text? || MimeMagic.new(content_type).text?
+  end
+
+  def text_content
+    return paste_params[:content]&.read.force_encoding('utf-8') if text?
+
+    paste_params[:code].presence
   end
 end

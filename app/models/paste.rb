@@ -25,7 +25,6 @@ class Paste < ApplicationRecord
   attribute :remove_at, default: -> { Time.zone.now + 7.days.seconds }
 
   before_save :train_classifier
-  before_save :mark_spam
   before_save :delete_spam
   before_create :create_permalink
   after_save :enqueue_removal
@@ -100,26 +99,10 @@ class Paste < ApplicationRecord
     return if marked_by.nil?
 
     classifier = Rails.application.config.classifier
-    classifier.train marked_kind, text_content
-  end
-
-  def mark_spam
-    return unless text?
-    return if marked_by.present? || marked_kind != 'unclassified'
-
-    classifier = Rails.application.config.classifier
-    self.marked_kind = classifier.classify(text_content).downcase || 'unclassified'
+    classifier.train marked_kind, content.attachment.open(&:read).force_encoding('utf-8')
   end
 
   def delete_spam
     destroy! if marked_by.present? && marked_kind == 'spam'
-  end
-
-  def text_content
-    content.attachment.download.force_encoding('utf-8')
-  end
-
-  def text?
-    Marcel::Magic.new(content.attachment.content_type).text? || MimeMagic.new(content.attachment.content_type).text?
   end
 end
