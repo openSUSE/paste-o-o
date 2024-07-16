@@ -6,11 +6,11 @@ class PastePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user&.mod?
-        scope.all
+        scope.order('created_at DESC').all
       elsif user
-        scope.where(user:).or(scope.where(private: false))
+        scope.order('created_at DESC').where(user:).or(scope.where(private: false, marked_kind: 'ham'))
       else
-        scope.where(private: false)
+        scope.order('created_at DESC').where(private: false, marked_kind: 'ham')
       end
     end
   end
@@ -30,5 +30,9 @@ class PastePolicy < ApplicationPolicy
   def destroy?
     # Pastes may have a nil user, so we have to check for that here
     (!record.user.nil? && record.user == user) || user&.mod?
+  end
+
+  def spam?
+    user&.mod?
   end
 end

@@ -36,6 +36,8 @@ gem 'font-awesome-sass'
 # Support for s3 in activestorage
 gem 'aws-sdk-s3', require: false
 
+gem 'classifier-reborn'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 

@@ -4,4 +4,5 @@
   expires_in = tag.b distance_of_time_in_words(paste.remove_after),
                      title: paste.remove_at
   private = paste.private ? badge(t(:private)) : ''
-= t(:paste_title_html, title:, private:, author:, expires_in:)
+  marked = policy(paste).spam? ? badge(t(paste.marked_kind)) : ''
+= t(:paste_title_html, title:, private:, marked:, author:, expires_in:)

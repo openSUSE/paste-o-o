@@ -2,6 +2,8 @@
 
 # The primary application model for storing pastes
 class Paste < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   PERIODS = [[I18n.t(:months, count: 3), 3.months],
              [I18n.t(:months, count: 1), 1.month],
              [I18n.t(:weeks, count: 2), 2.weeks],
@@ -15,11 +17,16 @@ class Paste < ApplicationRecord
 
   has_one_attached :content
   belongs_to :user, optional: true
+  belongs_to :marked_by, class_name: 'User', optional: true
+
+  enum :marked_kind, [ 'unclassified', 'ham', 'spam' ]
 
   attribute :author, default: -> { Paste.default_author }
   attribute :remove_at, default: -> { Time.zone.now + 7.days.seconds }
 
   before_create :create_permalink
+  before_save :train_classifier
+  before_save :mark_spam
   after_save :enqueue_removal
 
   validates :content, presence: true
@@ -84,5 +91,23 @@ class Paste < ApplicationRecord
 
   def enqueue_removal
     PastesCleanupJob.set(wait_until: remove_at).perform_later(self)
+  end
+
+  def train_classifier
+    return unless saved_change_to_marked_kind? || saved_change_to_marked_by_id?
+    return if marked_kind == 'unclassified'
+    return if marked_by.nil?
+
+    classifier = Rails.application.config.classifier
+    classifier.train marked_kind, content.attachment.open(&:read).force_encoding('utf-8')
+  end
+
+  def mark_spam
+    return unless Marcel::Magic.new(content.attachment.content_type).text? || MimeMagic.new(content.attachment.content_type).text?
+    return destroy! if marked_by.present? && marked_kind == 'spam'
+    return if marked_by.present? || marked_kind != 'unclassified'
+
+    classifier = Rails.application.config.classifier
+    self.marked_kind = classifier.classify(content.attachment.open(&:read).force_encoding('utf-8')).downcase || 'unclassified'
   end
 end
