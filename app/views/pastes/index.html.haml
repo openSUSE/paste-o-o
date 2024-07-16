@@ -4,7 +4,7 @@
     %nav.bg-body-tertiary.rounded.border.mb-3.sticky-top
       .input-group.p-3
         = f.select :marked_kinds,
-                   Paste.marked_kinds.keys.to_h { |k| [t(k), k] },
+                   Paste.marked_kinds.keys.index_by { |k| t(k) },
                    {}, class: 'form-select'
         = f.submit 'Set', class: 'btn btn-primary'
     .list-group
