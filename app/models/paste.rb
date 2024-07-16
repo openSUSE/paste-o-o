@@ -116,7 +116,7 @@ class Paste < ApplicationRecord
   end
 
   def text_content
-    content.attachment.open(&:read).force_encoding('utf-8')
+    content.attachment.download.force_encoding('utf-8')
   end
 
   def text?

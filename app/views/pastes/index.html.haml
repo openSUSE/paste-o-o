@@ -3,7 +3,8 @@
   = form_for(:pastes, url: spam_pastes_path, method: :post) do |f|
     %nav.bg-body-tertiary.rounded.border.mb-3.sticky-top
       .input-group.p-3
-        = f.select :marked_kinds, Paste.marked_kinds.keys, {}, class: 'form-select'
+        = f.select :marked_kinds, Paste.marked_kinds.keys, {},
+                   class: 'form-select'
         = f.submit 'Set', class: 'btn btn-primary'
     .list-group
       = f.collection_check_boxes(:ids, @pastes, :id, :title) do |c|
