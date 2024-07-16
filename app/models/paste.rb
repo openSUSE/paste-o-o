@@ -19,14 +19,15 @@ class Paste < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :marked_by, class_name: 'User', optional: true
 
-  enum :marked_kind, [ 'unclassified', 'ham', 'spam' ]
+  enum :marked_kind, %w[unclassified ham spam]
 
   attribute :author, default: -> { Paste.default_author }
   attribute :remove_at, default: -> { Time.zone.now + 7.days.seconds }
 
-  before_create :create_permalink
   before_save :train_classifier
   before_save :mark_spam
+  before_save :delete_spam
+  before_create :create_permalink
   after_save :enqueue_removal
 
   validates :content, presence: true
@@ -99,15 +100,26 @@ class Paste < ApplicationRecord
     return if marked_by.nil?
 
     classifier = Rails.application.config.classifier
-    classifier.train marked_kind, content.attachment.open(&:read).force_encoding('utf-8')
+    classifier.train marked_kind, text_content
   end
 
   def mark_spam
-    return unless Marcel::Magic.new(content.attachment.content_type).text? || MimeMagic.new(content.attachment.content_type).text?
-    return destroy! if marked_by.present? && marked_kind == 'spam'
+    return unless text?
     return if marked_by.present? || marked_kind != 'unclassified'
 
     classifier = Rails.application.config.classifier
-    self.marked_kind = classifier.classify(content.attachment.open(&:read).force_encoding('utf-8')).downcase || 'unclassified'
+    self.marked_kind = classifier.classify(text_content).downcase || 'unclassified'
+  end
+
+  def delete_spam
+    destroy! if marked_by.present? && marked_kind == 'spam'
+  end
+
+  def text_content
+    content.attachment.open(&:read).force_encoding('utf-8')
+  end
+
+  def text?
+    Marcel::Magic.new(content.attachment.content_type).text? || MimeMagic.new(content.attachment.content_type).text?
   end
 end
