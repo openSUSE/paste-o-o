@@ -28,7 +28,7 @@ class PastesController < ApplicationController
   end
 
   def create
-    @paste = authorize Paste.new(paste_params.merge({ marked_kind: @marked_kind }.compact))
+    @paste = authorize Paste.new(paste_params)
 
     respond_to do |format|
       if @paste.save
@@ -77,9 +77,10 @@ class PastesController < ApplicationController
   end
 
   def paste_params
-    defaults = {}
+    defaults = { marked_kind: @marked_kind }
     defaults[:user_id] = current_user.id if user_signed_in?
-    params.require(:paste).permit(:author, :title, :private, :remove_after, :content, :code, :auth_key).merge(defaults)
+    params.require(:paste).permit(:author, :title, :private, :remove_after,
+                                  :content, :code, :auth_key).merge(defaults.compact)
   end
 
   def pastes_params
@@ -94,14 +95,14 @@ class PastesController < ApplicationController
   end
 
   def text?
-    return unless paste_params[:content].present?
+    return false if paste_params[:content].blank?
 
     content_type = paste_params[:content].content_type
     Marcel::Magic.new(content_type).text? || MimeMagic.new(content_type).text?
   end
 
   def text_content
-    return paste_params[:content]&.read.force_encoding('utf-8') if text?
+    return paste_params[:content]&.read&.force_encoding('utf-8') if text?
 
     paste_params[:code].presence
   end
