@@ -4,7 +4,7 @@
 class PastesCleanupJob < ApplicationJob
   queue_as :default
 
-  def perform(paste)
-    paste.destroy
+  def perform(paste_id)
+    Paste.find_by(id: paste_id)&.destroy
   end
 end
