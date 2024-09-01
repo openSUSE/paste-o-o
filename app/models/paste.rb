@@ -83,6 +83,6 @@ class Paste < ApplicationRecord
   end
 
   def enqueue_removal
-    PastesCleanupJob.set(wait_until: remove_at).perform_later(self)
+    PastesCleanupJob.set(wait_until: remove_at).perform_later(self&.id)
   end
 end
