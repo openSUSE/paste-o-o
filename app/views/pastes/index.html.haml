@@ -1,5 +1,21 @@
 %h1= t(:pastes_list)
-.list-group
-  - @pastes.each do |paste|
-    = link_to paste, class: 'list-group-item' do
-      = render 'pastes/title', paste:
+- if policy(Paste.new).spam?
+  = form_for(:pastes, url: spam_pastes_path, method: :post) do |f|
+    %nav.bg-body-tertiary.rounded.border.mb-3.sticky-top
+      .input-group.p-3
+        = f.select :marked_kinds,
+                   Paste.marked_kinds.keys.index_by { |k| t(k) },
+                   {}, class: 'form-select'
+        = f.submit 'Set', class: 'btn btn-primary'
+    .list-group
+      = f.collection_check_boxes(:ids, @pastes, :id, :title) do |c|
+        .list-group-item
+          = c.check_box class: 'form-check-input', checked: false
+          = c.label class: 'form-check-label' do
+            = link_to c.object, class: 'text-decoration-none' do
+              = render 'pastes/title', paste: c.object
+- else
+  .list-group
+    - @pastes.each do |paste|
+      = link_to paste, class: 'list-group-item' do
+        = render 'pastes/title', paste:

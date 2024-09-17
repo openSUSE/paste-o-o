@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_02_04_132355) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_16_190641) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_02_04_132355) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "marked_by_id"
+    t.integer "marked_kind", default: 0, null: false
+    t.index ["marked_by_id"], name: "index_pastes_on_marked_by_id"
     t.index ["user_id"], name: "index_pastes_on_user_id"
   end
 
@@ -79,4 +82,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_02_04_132355) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "auths", "users"
   add_foreign_key "pastes", "users"
+  add_foreign_key "pastes", "users", column: "marked_by_id"
 end

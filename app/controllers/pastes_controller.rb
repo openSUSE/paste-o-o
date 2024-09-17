@@ -4,6 +4,7 @@
 # TODO: Implement authentication from the outside
 class PastesController < ApplicationController
   before_action :set_paste, only: %i[show destroy raw]
+  before_action :qualify_content, only: :create
   after_action :verify_authorized, except: :index
   after_action :verify_policy_scoped, only: :index
   # Set up activestorage for development
@@ -57,6 +58,16 @@ class PastesController < ApplicationController
     redirect_to @paste.content.attachment.url, allow_other_host: true
   end
 
+  def spam
+    authorize Paste.new
+
+    if Paste.where(id: pastes_params[:ids]).update(marked_kind: pastes_params[:marked_kinds], marked_by: current_user)
+      redirect_to pastes_url, notice: t(:paste_update)
+    else
+      render :index, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_paste
@@ -66,8 +77,33 @@ class PastesController < ApplicationController
   end
 
   def paste_params
-    defaults = {}
+    defaults = { marked_kind: @marked_kind }
     defaults[:user_id] = current_user.id if user_signed_in?
-    params.require(:paste).permit(:author, :title, :private, :remove_after, :content, :code, :auth_key).merge(defaults)
+    params.require(:paste).permit(:author, :title, :private, :remove_after,
+                                  :content, :code, :auth_key).merge(defaults.compact)
+  end
+
+  def pastes_params
+    params.require(:pastes).permit(:marked_kinds, ids: [])
+  end
+
+  def qualify_content
+    return unless text_content
+
+    classifier = Rails.application.config.classifier
+    @marked_kind = classifier.classify(text_content).downcase
+  end
+
+  def text?
+    return false if paste_params[:content].blank?
+
+    content_type = paste_params[:content].content_type
+    Marcel::Magic.new(content_type).text? || MimeMagic.new(content_type).text?
+  end
+
+  def text_content
+    return paste_params[:content]&.read&.force_encoding('utf-8') if text?
+
+    paste_params[:code].presence
   end
 end

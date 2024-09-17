@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   resources :pastes, only: %w[new create index show destroy], param: :permalink do
     get :raw
   end
+
+  resource :pastes do
+    post :spam
+  end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   get '/up' => 'rails/health#show'

@@ -45,7 +45,7 @@ en:
   minutes:
     one: a minute
     other: '%{count} minutes'
-  paste_title_html: "%{title} %{private} created by %{author} will expire in %{expires_in}"
+  paste_title_html: "%{title} %{private} %{marked} created by %{author} will expire in %{expires_in}"
   adjective_animal: '%{adjective} %{animal}'
   user_paste: "%{user}'s paste"
   anonymous_paste: Anonymous paste
@@ -101,6 +101,9 @@ en:
   contract: Contract
   remove: Remove
   not_authorized: You are not authorized to perform this action.
+  spam: Spam
+  ham: Not Spam
+  unclassified: Unknown if spam
   helpers:
     label:
       auth:
