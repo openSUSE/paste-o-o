@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_16_190641) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_09_092122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_16_190641) do
     t.integer "marked_kind", default: 0, null: false
     t.index ["marked_by_id"], name: "index_pastes_on_marked_by_id"
     t.index ["user_id"], name: "index_pastes_on_user_id"
+  end
+
+  create_table "terms", force: :cascade do |t|
+    t.integer "subject", null: false
+    t.string "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -68,6 +68,13 @@ en:
   paste_not_destroyed: No permissions to destroy the paste.
   paste_not_found: Paste not found
   pastes_list: Listing pastes
+  term_created: Term was successfully created.
+  term_failed: Term failed to save.
+  term_create: Term was successfully created.
+  term_destroyed: Term was successfully destroyed.
+  term_not_destroyed: No permissions to destroy the term.
+  term_not_found: Term not found
+  terms_list: Listing forbidden terms
   auths: Keys
   auth_remove: Remove the key
   auth_created: Key was successfully created.
@@ -91,6 +98,7 @@ en:
   toggle_navigation: Toggle Navigation
   my_pastes: My Pastes
   my_keys: My Keys
+  forbidden_terms: Forbidden Terms
   logout: Log Out
   no_attachment: No attachment
   options: Options
