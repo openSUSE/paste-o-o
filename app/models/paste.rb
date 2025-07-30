@@ -123,6 +123,8 @@ class Paste < ApplicationRecord
       elsif term.action == 'remove'
         self.remove_at = Time.zone.now + 5.seconds
       end
+
+      break
     end
   end
 end
