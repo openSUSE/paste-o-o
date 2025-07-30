@@ -5,9 +5,12 @@
       = message
 
   .form-floating.mb-3
-    = f.select :subject, Term.subjects.keys, {}, { class: 'form-select' }
+    = f.select :subject, Term.subjects.keys.to_h { |t| [t.humanize, t] }, {}, { class: 'form-select' }
     = f.label :subject, class: 'form-label'
   .form-floating.mb-3
     = f.text_field :content, class: 'form-control'
     = f.label :content, class: 'form-label'
+  .form-floating.mb-3
+    = f.select :action, Term.actions.keys.to_h { |t| [t.humanize, t] }, {}, { class: 'form-select' }
+    = f.label :action, class: 'form-label'
   = f.submit t(:save), class: 'btn btn-primary'

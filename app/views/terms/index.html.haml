@@ -5,6 +5,7 @@
   - @terms.each do |term|
     .list-group-item.d-flex.justify-content-between
       %span
+        = term.action.humanize
         %b= term.subject
         with content:
         "#{term.content}"

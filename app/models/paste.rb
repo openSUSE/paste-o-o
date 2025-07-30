@@ -118,7 +118,11 @@ class Paste < ApplicationRecord
       content = self.send(term.subject)
       next unless content.include?(term.content)
 
-      self.marked_kind = 'spam'
+      if term.action == 'mark_spam'
+        self.marked_kind = 'spam'
+      elsif term.action == 'remove'
+        self.remove_at = Time.zone.now + 5.seconds
+      end
     end
   end
 end
