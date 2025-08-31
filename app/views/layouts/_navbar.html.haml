@@ -31,7 +31,8 @@
                 = link_to t(:my_keys), auths_path, class: 'dropdown-item'
               - if policy(Term.new).index?
                 %li
-                  = link_to t(:forbidden_terms), terms_path, class: 'dropdown-item'
+                  = link_to t(:forbidden_terms),
+                            terms_path, class: 'dropdown-item'
               %li
                 %hr.dropdown-divider
               %li

@@ -1,6 +1,7 @@
 %h1= t(:terms_list)
 - if policy(Term.new).new?
-  = link_to(t(:create), new_term_path, class: 'btn btn-primary mb-3')
+  = link_to(t(:create),
+            new_term_path, class: 'btn btn-primary mb-3')
 .list-group
   - @terms.each do |term|
     .list-group-item.d-flex.justify-content-between
