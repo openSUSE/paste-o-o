@@ -57,7 +57,7 @@ class Paste < ApplicationRecord
 
     content.attachment.open(&:read).force_encoding('utf-8')
   rescue ActiveStorage::FileNotFoundError
-    return ''
+    ''
   end
 
   def content_size
@@ -114,14 +114,14 @@ class Paste < ApplicationRecord
   end
 
   def check_terms
-    Term.all.each do |term|
-      content = self.send(term.subject)
+    Term.find_each do |term|
+      content = send(term.subject)
       next unless content.include?(term.content)
 
       if term.action == 'mark_spam'
         self.marked_kind = 'spam'
       elsif term.action == 'remove'
-        self.remove_at = Time.zone.now + 5.seconds
+        self.remove_at = 5.seconds.from_now
       end
 
       break
