@@ -26,6 +26,7 @@ class Paste < ApplicationRecord
 
   before_save :train_classifier
   before_save :delete_spam
+  before_save :check_terms
   before_create :create_permalink
   after_save :enqueue_removal
 
@@ -51,7 +52,13 @@ class Paste < ApplicationRecord
     content.attach(blob)
   end
 
-  def code = ''
+  def code
+    return '' unless content&.attachment
+
+    content.attachment.open(&:read).force_encoding('utf-8')
+  rescue ActiveStorage::FileNotFoundError
+    ''
+  end
 
   def content_size
     errors.add(:content, I18n.t(:too_large)) if content.blob&.byte_size&.>(2.megabytes)
@@ -99,10 +106,25 @@ class Paste < ApplicationRecord
     return if marked_by.nil?
 
     classifier = Rails.application.config.classifier
-    classifier.train marked_kind, content.attachment.open(&:read).force_encoding('utf-8')
+    classifier.train marked_kind, code
   end
 
   def delete_spam
     destroy! if marked_by.present? && marked_kind == 'spam'
+  end
+
+  def check_terms
+    Term.find_each do |term|
+      content = send(term.subject)
+      next unless content.include?(term.content)
+
+      if term.action == 'mark_spam'
+        self.marked_kind = 'spam'
+      elsif term.action == 'remove'
+        self.remove_at = 5.seconds.from_now
+      end
+
+      break
+    end
   end
 end

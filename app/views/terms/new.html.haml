@@ -1,0 +1,18 @@
+%h1= t(:create_term)
+= form_for @term do |f|
+  - @term.errors.full_messages.each do |message|
+    .alert.alert-danger
+      = message
+
+  .form-floating.mb-3
+    = f.select :subject, Term.subjects.keys.index_by(&:humanize),
+               {}, { class: 'form-select' }
+    = f.label :subject, class: 'form-label'
+  .form-floating.mb-3
+    = f.text_field :content, class: 'form-control'
+    = f.label :content, class: 'form-label'
+  .form-floating.mb-3
+    = f.select :action, Term.actions.keys.index_by(&:humanize),
+               {}, { class: 'form-select' }
+    = f.label :action, class: 'form-label'
+  = f.submit t(:save), class: 'btn btn-primary'
