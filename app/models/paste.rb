@@ -25,8 +25,8 @@ class Paste < ApplicationRecord
   attribute :remove_at, default: -> { Time.zone.now + 7.days.seconds }
 
   before_save :train_classifier
-  before_save :delete_spam
   before_save :check_terms
+  after_save :delete_spam
   before_create :create_permalink
   after_save :enqueue_removal
 
