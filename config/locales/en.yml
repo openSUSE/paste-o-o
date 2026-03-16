@@ -67,6 +67,7 @@ en:
   paste_destroyed: Paste was successfully destroyed.
   paste_not_destroyed: No permissions to destroy the paste.
   paste_not_found: Paste not found
+  paste_update: Paste was successfully updated.
   pastes_list: Listing pastes
   term_created: Term was successfully created.
   term_failed: Term failed to save.
