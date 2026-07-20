@@ -61,7 +61,10 @@ class PastesController < ApplicationController
   def spam
     authorize Paste.new
 
-    if Paste.where(id: pastes_params[:ids]).update(marked_kind: pastes_params[:marked_kinds], marked_by: current_user)
+    pastes = Paste.where(id: pastes_params[:ids])
+    results = pastes.map { |paste| paste.update(marked_kind: pastes_params[:marked_kinds], marked_by: current_user) }
+
+    if results.all?
       redirect_to pastes_url, notice: t(:paste_update)
     else
       render :index, status: :unprocessable_content

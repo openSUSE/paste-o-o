@@ -56,7 +56,8 @@ class Paste < ApplicationRecord
     return '' unless content&.attachment
 
     content.attachment.open(&:read).force_encoding('utf-8')
-  rescue ActiveStorage::FileNotFoundError
+  rescue StandardError => e
+    Rails.logger.error("Paste##{id} failed to read attachment content: #{e.class}: #{e.message}")
     ''
   end
 
@@ -101,7 +102,7 @@ class Paste < ApplicationRecord
   end
 
   def train_classifier
-    return unless saved_change_to_marked_kind? || saved_change_to_marked_by_id?
+    return unless will_save_change_to_marked_kind? || will_save_change_to_marked_by_id?
     return if marked_kind == 'unclassified'
     return if marked_by.nil?
 
