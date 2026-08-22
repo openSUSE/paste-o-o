@@ -14,6 +14,11 @@ RSpec.describe PastesCleanupJob do
       freeze_time
     end
 
+    after do
+      ActiveJob::Base.queue_adapter.perform_enqueued_jobs = false
+      ActiveJob::Base.queue_adapter.perform_enqueued_at_jobs = false
+    end
+
     it 'enqueues the paste removal' do
       expect { paste }.to have_enqueued_job(described_class).on_queue('default')
     end
