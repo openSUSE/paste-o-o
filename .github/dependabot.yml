@@ -7,3 +7,24 @@ updates:
     schedule:
       interval: "daily"
     vendor: true
+
+    groups:
+      rails:
+        patterns:
+          - actioncable
+          - actionmailbox
+          - actionmailer
+          - actionpack
+          - actiontext
+          - actionview
+          - activejob
+          - activemodel
+          - activerecord
+          - activestorage
+          - activesupport
+          - rails
+          - railties
+      rubocop:
+        patterns:
+          - "rubocop"
+          - "rubocop-*"
