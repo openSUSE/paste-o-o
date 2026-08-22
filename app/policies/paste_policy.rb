@@ -6,11 +6,11 @@ class PastePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user&.mod?
-        scope.order('created_at DESC').all
+        scope.order(created_at: :desc).all
       elsif user
-        scope.order('created_at DESC').where(user:).or(scope.where(private: false, marked_kind: 'ham'))
+        scope.order(created_at: :desc).where(user:).or(scope.where(private: false, marked_kind: 'ham'))
       else
-        scope.order('created_at DESC').where(private: false, marked_kind: 'ham')
+        scope.order(created_at: :desc).where(private: false, marked_kind: 'ham')
       end
     end
   end

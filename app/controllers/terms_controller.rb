@@ -21,7 +21,7 @@ class TermsController < ApplicationController
     if @term.save
       redirect_to terms_url, notice: t(:term_create)
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

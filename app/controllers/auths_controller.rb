@@ -23,7 +23,7 @@ class AuthsController < ApplicationController
     if @auth.save
       redirect_to auths_url, notice: t(:auth_create)
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

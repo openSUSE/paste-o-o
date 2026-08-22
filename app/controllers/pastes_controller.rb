@@ -35,8 +35,8 @@ class PastesController < ApplicationController
         format.html { redirect_to paste_url(@paste), notice: t(:paste_create) }
         format.json { render :show, status: :created, location: @paste }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @paste.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @paste.errors, status: :unprocessable_content }
       end
     end
   end
@@ -64,7 +64,7 @@ class PastesController < ApplicationController
     if Paste.where(id: pastes_params[:ids]).update(marked_kind: pastes_params[:marked_kinds], marked_by: current_user)
       redirect_to pastes_url, notice: t(:paste_update)
     else
-      render :index, status: :unprocessable_entity
+      render :index, status: :unprocessable_content
     end
   end
 
