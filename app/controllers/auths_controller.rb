@@ -39,12 +39,12 @@ class AuthsController < ApplicationController
   private
 
   def set_auth
-    @auth = authorize Auth.find(params[:id])
+    @auth = authorize Auth.find(params.expect(:id))
 
     redirect_to auths_url, alert: t(:auth_not_found) unless @auth
   end
 
   def auth_params
-    params.require(:auth).permit(:name)
+    params.expect(auth: [:name])
   end
 end
