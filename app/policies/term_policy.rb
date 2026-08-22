@@ -6,7 +6,7 @@ class TermPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if user&.mod?
-        scope.order('created_at DESC').all
+        scope.order(created_at: :desc).all
       else
         []
       end

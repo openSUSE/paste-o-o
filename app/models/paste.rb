@@ -19,7 +19,7 @@ class Paste < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :marked_by, class_name: 'User', optional: true
 
-  enum :marked_kind, %w[unclassified ham spam]
+  enum :marked_kind, { 'unclassified' => 0, 'ham' => 1, 'spam' => 2 }
 
   attribute :author, default: -> { Paste.default_author }
   attribute :remove_at, default: -> { Time.zone.now + 7.days.seconds }
@@ -97,7 +97,7 @@ class Paste < ApplicationRecord
   end
 
   def enqueue_removal
-    PastesCleanupJob.set(wait_until: remove_at).perform_later(self&.id)
+    PastesCleanupJob.set(wait_until: remove_at).perform_later(id)
   end
 
   def train_classifier

@@ -3,6 +3,7 @@
 # The primary controller in the application
 class ApplicationController < ActionController::Base
   include Pundit::Authorization
+
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   protected
@@ -21,6 +22,6 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     flash[:alert] = t(:not_authorized)
-    redirect_back(fallback_location: root_path)
+    redirect_back_or_to(root_path)
   end
 end
