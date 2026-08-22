@@ -79,12 +79,12 @@ class PastesController < ApplicationController
   def paste_params
     defaults = { marked_kind: @marked_kind }
     defaults[:user_id] = current_user.id if user_signed_in?
-    params.require(:paste).permit(:author, :title, :private, :remove_after,
-                                  :content, :code, :auth_key).merge(defaults.compact)
+    params.expect(paste: %i[author title private remove_after
+                            content code auth_key]).merge(defaults.compact)
   end
 
   def pastes_params
-    params.require(:pastes).permit(:marked_kinds, ids: [])
+    params.expect(pastes: [:marked_kinds, { ids: [] }])
   end
 
   def qualify_content
