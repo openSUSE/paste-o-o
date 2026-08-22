@@ -94,10 +94,10 @@ RSpec.describe 'Oldapis' do
 
   describe 'GET /:permalink' do
     context 'with non existing paste' do
-      it 'redirects to susepaste.org' do
+      it 'redirects to not found' do
         get "/#{SecureRandom.hex(6)}"
 
-        expect(response.redirect_url).to start_with('https://susepaste.org/')
+        expect(response).to redirect_to('http://www.example.com/pastes')
       end
     end
   end
