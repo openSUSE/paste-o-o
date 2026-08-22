@@ -26,8 +26,8 @@ class Paste < ApplicationRecord
 
   before_save :train_classifier
   before_save :check_terms
-  after_save :delete_spam
   before_create :create_permalink
+  after_save :delete_spam
   after_save :enqueue_removal
 
   validates :content, presence: true
