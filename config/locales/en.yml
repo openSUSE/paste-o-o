@@ -69,6 +69,7 @@ en:
   paste_not_found: Paste not found
   paste_update: Paste was successfully updated.
   pastes_list: Listing pastes
+  regular_expression: Regular expression
   term_created: Term was successfully created.
   term_failed: Term failed to save.
   term_create: Term was successfully created.

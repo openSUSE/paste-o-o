@@ -11,6 +11,9 @@
   .form-floating.mb-3
     = f.text_field :content, class: 'form-control'
     = f.label :content, class: 'form-label'
+  .d-flex.align-items-center.mb-3
+    = f.check_box :regex, class: 'form-check-input me-2 mt-0'
+    = f.label t(:regular_expression), class: 'form-check-label'
   .form-floating.mb-3
     = f.select :action, Term.actions.keys.index_by(&:humanize),
                {}, { class: 'form-select' }
