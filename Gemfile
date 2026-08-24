@@ -10,7 +10,7 @@ gem 'rails', '~> 8.1'
 gem 'sprockets-rails'
 
 # Using importmaps to import and use js dependencies
-gem 'importmap-rails', '~> 2.0'
+gem 'importmap-rails', '~> 2.2'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.5'
