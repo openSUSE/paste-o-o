@@ -19,7 +19,8 @@ class OldapiController < ApplicationController
     if (@paste = Paste.find_by(permalink: params[:permalink]))
       redirect_to paste_url(@paste)
     else
-      redirect_to "https://susepaste.org/#{params[:permalink]}", allow_other_host: true
+      # TODO: maybe this would better be a 404
+      redirect_to pastes_url, alert: t(:paste_not_found)
     end
   end
 
