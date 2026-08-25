@@ -10,13 +10,13 @@ class PastePolicy < ApplicationPolicy
       elsif user
         scope.order(created_at: :desc).where(user:).or(scope.where(private: false, marked_kind: 'ham'))
       else
-        scope.order(created_at: :desc).where(private: false, marked_kind: 'ham')
+        scope.none
       end
     end
   end
 
   def index?
-    true
+    user.present?
   end
 
   def show?

@@ -10,10 +10,14 @@
       %span.navbar-toggler-icon
     .collapse.navbar-collapse#navbar-content
       %ul.navbar-nav.me-auto
-        %li.nav-item
-          = link_to t(:create), new_paste_path, class: 'nav-link'
-        %li.nav-item
-          = link_to t(:recent), pastes_path, class: 'nav-link'
+        - if policy(Paste).index?
+          // create is not covered by the policy, but we hide it to simplify
+          // the UI when it's the only available menu option (a single button
+          // which merely does the same as the logo - going to start - felt odd)
+          %li.nav-item
+            = link_to t(:create), new_paste_path, class: 'nav-link'
+          %li.nav-item
+            = link_to t(:recent), pastes_path, class: 'nav-link'
       .navbar-nav
         - if user_signed_in?
           .dropdown.nav-item

@@ -21,7 +21,15 @@ class ApplicationController < ActionController::Base
   private
 
   def user_not_authorized
-    flash[:alert] = t(:not_authorized)
-    redirect_back_or_to(root_path)
+    respond_to do |format|
+      format.html do
+        flash[:alert] = t(:not_authorized)
+        redirect_back_or_to(root_path)
+      end
+
+      format.json do
+        render json: { error: t(:not_authorized) }, status: :forbidden
+      end
+    end
   end
 end

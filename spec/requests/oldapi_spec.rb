@@ -18,10 +18,10 @@ RSpec.describe 'Oldapis' do
     context 'with a private paste' do
       let(:params) { { title: 'name', name: 'author', code: 'this is the content of the paste', expire: 7 } }
 
-      it 'returns an empty list of pastes' do
+      it 'returns no list of pastes' do
         get '/pastes', as: :json
 
-        expect(JSON.parse(body).length).to eq(0)
+        expect(JSON.parse(body)).to eq({ 'error' => 'You are not authorized to perform this action.' })
       end
 
       it 'you can access the paste' do

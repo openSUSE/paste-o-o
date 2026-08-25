@@ -38,13 +38,6 @@ RSpec.describe 'Pastes' do
         click_link_or_button 'Save'
         expect(page).to have_text('Private')
       end
-
-      it 'with private selected cannot see it in the list' do
-        check('paste_private')
-        click_link_or_button 'Save'
-        visit '/pastes'
-        expect(page).to have_no_text('Anonymous paste created by')
-      end
     end
 
     context 'without private selected' do
@@ -59,16 +52,14 @@ RSpec.describe 'Pastes' do
         expect(page).to have_no_text('Private')
       end
 
-      it 'can see it in the list' do
-        visit '/pastes'
-        expect(page).to have_text('Anonymous paste created by')
-      end
-
       it 'cannot destroy their own paste' do
-        visit '/pastes'
-        click_on 'paste created by'
         expect(page).to have_no_text('Remove')
       end
+    end
+
+    it 'does not allow access to pastes' do
+      visit '/pastes'
+      expect(page).to have_text('You are not authorized to perform this action.')
     end
   end
 
