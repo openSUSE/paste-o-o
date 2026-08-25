@@ -9,7 +9,7 @@
         = term.action.humanize
         %b= term.subject
         with content:
-        "#{term.content}"
+        %code= term.represent_content
       = button_to t(:remove), term_path(term),
                   method: :delete,
                   class: 'btn p-0 text-danger'

@@ -118,7 +118,8 @@ class Paste < ApplicationRecord
   def check_terms
     Term.find_each do |term|
       content = send(term.subject)
-      next unless content.include?(term.content)
+
+      next unless term.matches_regex?(content) || term.matches_substring?(content)
 
       if term.action == 'mark_spam'
         self.marked_kind = 'spam'

@@ -42,6 +42,6 @@ class TermsController < ApplicationController
   end
 
   def term_params
-    params.expect(term: %i[subject content action])
+    params.expect(term: %i[action content regex subject])
   end
 end
