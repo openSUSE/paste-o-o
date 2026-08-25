@@ -69,7 +69,7 @@ gem 'omniauth_openid_connect'
 gem 'omniauth-rails_csrf_protection'
 
 # Use pundit for user authorization
-gem 'pundit', '~> 2.3'
+gem 'pundit', '~> 2.5'
 
 # Faking names
 gem 'faker'
