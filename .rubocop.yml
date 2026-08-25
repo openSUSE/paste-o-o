@@ -25,3 +25,6 @@ AllCops:
 Layout/SpaceInsideParens:
   Exclude:
     - "**/*.haml"
+
+Metrics/ClassLength:
+  Max: 200
