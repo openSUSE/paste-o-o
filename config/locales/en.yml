@@ -72,7 +72,11 @@ en:
   regular_expression: Regular expression
   term_created: Term was successfully created.
   term_failed: Term failed to save.
-  term_create: Term was successfully created.
+  term_created: Term was successfully created.
+  term_created_applied:
+    zero: Term was successfully created - no existing pastes matched.
+    one: Term was successfully created - enforced on 1 existing paste.
+    other: Term was successfully created - enforced on %{count} existing pastes.
   term_destroyed: Term was successfully destroyed.
   term_not_destroyed: No permissions to destroy the term.
   term_not_found: Term not found
@@ -105,6 +109,7 @@ en:
   no_attachment: No attachment
   options: Options
   save: Save
+  save_and_apply: Save and apply
   download: Download
   document_notice: You can only see the full document, if you download it
   expand: Expand

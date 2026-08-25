@@ -92,6 +92,13 @@ class Paste < ApplicationRecord
     errors.add(:remove_after, t(:too_long, time: largest_period.inspect)) if remove_after >= largest_period.seconds
   end
 
+  def enforce_term!(term, user_id)
+    return unless match_term?(term)
+
+    self.marked_by_id = user_id
+    save
+  end
+
   private
 
   def create_permalink
@@ -115,19 +122,23 @@ class Paste < ApplicationRecord
     destroy! if marked_by.present? && marked_kind == 'spam'
   end
 
+  def match_term?(term)
+    content = send(term.subject)
+
+    return false unless term.matches_regex?(content) || term.matches_substring?(content)
+
+    if term.action == 'mark_spam'
+      self.marked_kind = 'spam'
+    elsif term.action == 'remove'
+      self.remove_at = 5.seconds.from_now
+    end
+
+    true
+  end
+
   def check_terms
     Term.find_each do |term|
-      content = send(term.subject)
-
-      next unless term.matches_regex?(content) || term.matches_substring?(content)
-
-      if term.action == 'mark_spam'
-        self.marked_kind = 'spam'
-      elsif term.action == 'remove'
-        self.remove_at = 5.seconds.from_now
-      end
-
-      break
+      break if match_term?(term)
     end
   end
 

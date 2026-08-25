@@ -19,3 +19,5 @@
                {}, { class: 'form-select' }
     = f.label :action, class: 'form-label'
   = f.submit t(:save), class: 'btn btn-primary'
+  = f.submit t(:save_and_apply),
+             name: 'save_and_apply', class: 'btn btn-primary'

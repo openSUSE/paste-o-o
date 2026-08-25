@@ -15,11 +15,24 @@ class TermsController < ApplicationController
     @term = authorize Term.new
   end
 
+  def enforce_term(term)
+    count = 0
+    Paste.where.not(marked_kind: 'spam').find_each do |paste|
+      count += 1 if paste.enforce_term!(term, current_user.id)
+    end
+
+    count
+  end
+
   def create
     @term = authorize Term.new(term_params)
 
     if @term.save
-      redirect_to terms_url, notice: t(:term_create)
+      if params[:save_and_apply].present?
+        redirect_to terms_url, notice: t(:term_created_applied, count: enforce_term(@term))
+      else
+        redirect_to terms_url, notice: t(:term_created)
+      end
     else
       render :new, status: :unprocessable_content
     end
