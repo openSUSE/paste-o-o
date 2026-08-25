@@ -254,7 +254,7 @@ GEM
     parser (3.3.12.0)
       ast (~> 2.4.1)
       racc
-    pg (1.5.6)
+    pg (1.6.3)
     popper_js (2.11.8)
     pp (0.6.4)
       prettyprint
@@ -477,7 +477,7 @@ DEPENDENCIES
   omniauth
   omniauth-rails_csrf_protection
   omniauth_openid_connect
-  pg (~> 1.5)
+  pg (~> 1.6)
   puma (~> 8.0)
   pundit (~> 2.5)
   rails (~> 8.1)
