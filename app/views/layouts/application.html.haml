@@ -11,7 +11,7 @@
     = favicon_link_tag 'favicon.ico'
   %body
     = render partial: 'layouts/navbar'
-    .toast-container.position-fixed.bottom-0.end-0.p-3
+    .toast-container.position-fixed.toast-container-custom.end-0.p-3
       - flash.each do |type, text|
         - type = 'success' if type == 'notice'
         - type = 'danger' if type == 'alert'
