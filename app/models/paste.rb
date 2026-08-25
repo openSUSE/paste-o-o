@@ -26,6 +26,7 @@ class Paste < ApplicationRecord
 
   before_save :train_classifier
   before_save :check_terms
+  before_save :set_content_type
   before_create :create_permalink
   after_save :delete_spam
   after_save :enqueue_removal
@@ -127,5 +128,16 @@ class Paste < ApplicationRecord
 
       break
     end
+  end
+
+  def set_content_type
+    blob = content.blob
+
+    type = Rack::MediaType.type(blob.content_type)
+    params = Rack::MediaType.params(blob.content_type)
+
+    return unless type == 'text/plain' && !params.key?('charset')
+
+    blob.update(content_type: "#{type}; charset=utf-8")
   end
 end
