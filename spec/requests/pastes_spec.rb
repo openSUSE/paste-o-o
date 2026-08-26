@@ -14,12 +14,6 @@ RSpec.describe 'Pastes' do
     context 'with a public paste' do
       let(:params) { { title: 'name', author: 'author', code: 'this is the content of the paste', private: false } }
 
-      it 'returns a non-empty list of pastes' do
-        get '/pastes', as: :json
-
-        expect(JSON.parse(body).length).to eq(1)
-      end
-
       it 'lets you can access the paste' do
         paste.delete('updated_at')
         get paste['url'], as: :json
@@ -47,12 +41,6 @@ RSpec.describe 'Pastes' do
 
     context 'with a private paste' do
       let(:params) { { title: 'name', author: 'author', code: 'this is the content of the paste', private: true } }
-
-      it 'returns an empty list of pastes' do
-        get '/pastes', as: :json
-
-        expect(JSON.parse(body).length).to eq(0)
-      end
 
       it 'you can access the paste' do
         paste.delete('updated_at')

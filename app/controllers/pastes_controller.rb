@@ -5,13 +5,15 @@
 class PastesController < ApplicationController
   before_action :set_paste, only: %i[show destroy raw]
   before_action :qualify_content, only: :create
-  after_action :verify_authorized, except: :index
+  after_action :verify_authorized
   after_action :verify_policy_scoped, only: :index
   # Set up activestorage for development
   before_action -> { ActiveStorage::Current.url_options = { host: request.base_url } },
                 if: -> { Rails.env.local? }
 
   def index
+    authorize Paste
+
     @pastes = if params[:user]
                 policy_scope(Paste)&.by_author(User.find_by(username: params[:user]))
               else
