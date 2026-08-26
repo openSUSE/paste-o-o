@@ -143,7 +143,7 @@ GEM
       net-http (~> 0.5)
     fast-stemmer (1.0.2)
     ffi (1.17.4)
-    font-awesome-sass (6.5.2)
+    font-awesome-sass (6.7.2)
       sassc (~> 2.0)
     globalid (1.4.0)
       activesupport (>= 6.1)
