@@ -14,11 +14,11 @@ class AuthPolicy < ApplicationPolicy
   end
 
   def index?
-    !!user
+    user.present?
   end
 
   def create?
-    !!user
+    user.present?
   end
 
   def destroy?
