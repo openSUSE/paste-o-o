@@ -66,7 +66,7 @@ RSpec.describe 'Pastes with Forbidden Terms' do
         freeze_time do
           create_paste
           paste = Paste.last
-          expect(paste.marked_kind).to eq('ham')
+          expect(paste.marked_kind).to eq('unclassified')
           expect(paste.remove_at).to be > 5.seconds.from_now
         end
       end
