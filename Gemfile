@@ -37,9 +37,7 @@ gem 'font-awesome-sass'
 gem 'aws-sdk-s3', require: false
 
 gem 'classifier-reborn'
-
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem 'redis'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
