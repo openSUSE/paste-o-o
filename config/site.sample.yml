@@ -3,6 +3,9 @@ shared:
   # Require a logged-in user (or a valid API key) before a paste can be posted.
   # Defaults to true. Set to false to allow anonymous posting.
   require_login_to_post: true
+  # Require a logged-in user before pastes can be viewed. Defaults to false so
+  # reading stays open. Set to true to also gate viewing.
+  require_login_to_view: false
 
 test:
   authentication:
