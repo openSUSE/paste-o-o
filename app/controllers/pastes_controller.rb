@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 # The endpoints and pages for pastes
-# TODO: Implement authentication from the outside
 class PastesController < ApplicationController
+  before_action :require_login, only: %i[new create]
   before_action :set_paste, only: %i[show destroy raw]
   before_action :qualify_content, only: :create
   after_action :verify_authorized
@@ -73,6 +73,25 @@ class PastesController < ApplicationController
   end
 
   private
+
+  # Posting requires an authenticated user (browser session or API key) unless
+  # the site is configured to allow anonymous posting. Rendering the login
+  # prompt here avoids the redirect loop that would occur if we let Pundit
+  # bounce anonymous users back to the root paste form. Delegating to the
+  # policy keeps the "is login required?" decision in one place.
+  def require_login
+    return if policy(Paste).create?
+
+    respond_to do |format|
+      format.html do
+        # The gate page carries its own prominent login CTA, so tell the navbar
+        # to hide its (now redundant) login buttons on this page.
+        @focus_login = true
+        render 'sessions/new', status: :unauthorized
+      end
+      format.json { render json: { error: t(:need_login) }, status: :unauthorized }
+    end
+  end
 
   def set_paste
     @paste = Paste.find_by(permalink: params[:paste_permalink] || params[:permalink])

@@ -3,7 +3,31 @@
 require 'rails_helper'
 
 RSpec.describe 'Pastes' do
-  context 'when an anonymous user creates a new paste' do
+  context 'when an anonymous user' do
+    it 'is prompted to log in instead of the paste form', :aggregate_failures do
+      visit '/'
+      expect(page).to have_text('You need to log in before accessing that page')
+      expect(page).to have_no_field('paste_code')
+    end
+
+    it 'cannot post a paste' do
+      visit '/'
+      expect(page).to have_no_button('Save')
+    end
+
+    it 'does not allow access to pastes' do
+      visit '/pastes'
+      expect(page).to have_text('You are not authorized to perform this action.')
+    end
+  end
+
+  context 'when anonymous posting is allowed' do
+    before do
+      # Operators can opt out of the login-to-post requirement.
+      allow(Rails.configuration.site).to receive(:fetch).and_call_original
+      allow(Rails.configuration.site).to receive(:fetch).with(:require_login_to_post, true).and_return(false)
+    end
+
     it 'without entering any content' do
       visit '/'
       click_link_or_button 'Save'
@@ -55,11 +79,6 @@ RSpec.describe 'Pastes' do
       it 'cannot destroy their own paste' do
         expect(page).to have_no_text('Remove')
       end
-    end
-
-    it 'does not allow access to pastes' do
-      visit '/pastes'
-      expect(page).to have_text('You are not authorized to perform this action.')
     end
   end
 

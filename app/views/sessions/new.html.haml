@@ -1,0 +1,13 @@
+.d-flex.flex-column.align-items-center.justify-content-center.h-100
+  .text-center.mb-3
+    %h1= t(:need_login)
+  .row.justify-content-center.w-100
+    .col-10.col-sm-6.col-lg-4
+      - if Rails.env.development?
+        = render 'sessions/form', provider: { id: 'developer',
+                                              name: 'Developer' }
+      - Rails.configuration.site[:authentication]&.each_value do |value|
+        = render 'sessions/form', provider: { id: value[:name] }
+      - if (sign_up_link = Rails.configuration.site[:sign_up_link])
+        = link_to t(:sign_up), sign_up_link,
+                  class: 'btn btn-outline-primary w-100 mt-2'

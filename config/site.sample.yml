@@ -1,5 +1,8 @@
 shared:
   program_name: openSUSE Paste
+  # Require a logged-in user (or a valid API key) before a paste can be posted.
+  # Defaults to true. Set to false to allow anonymous posting.
+  require_login_to_post: true
 
 test:
   authentication:

@@ -24,7 +24,7 @@ class PastePolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    !require_login_to_post? || user.present?
   end
 
   def destroy?
@@ -34,5 +34,13 @@ class PastePolicy < ApplicationPolicy
 
   def spam?
     user&.mod?
+  end
+
+  private
+
+  # When enabled in site config, posting a paste requires authentication.
+  # Defaults to true so the anti-abuse gate is on unless operators opt out.
+  def require_login_to_post?
+    Rails.configuration.site.fetch(:require_login_to_post, true)
   end
 end

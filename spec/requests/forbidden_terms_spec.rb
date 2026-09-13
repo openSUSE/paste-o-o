@@ -4,7 +4,9 @@ require 'rails_helper'
 
 RSpec.describe 'Pastes with Forbidden Terms' do
   describe 'POST /pastes' do
-    let(:paste_params) { { title: 'normal title', author: 'normal author', code: 'normal code' } }
+    let(:user) { User.create!(username: 'apiuser', email: 'api@opensuse.org') }
+    let(:auth) { user.auths.create!(name: 'test') }
+    let(:paste_params) { { title: 'normal title', author: 'normal author', code: 'normal code', auth_key: auth.key } }
     let(:create_paste) do
       post '/pastes', params: { paste: paste_params }, headers: { 'Content-Type': 'application/json' }, as: :json
       response.parsed_body
