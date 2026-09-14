@@ -82,15 +82,7 @@ class PastesController < ApplicationController
   def require_login
     return if policy(Paste).create?
 
-    respond_to do |format|
-      format.html do
-        # The gate page carries its own prominent login CTA, so tell the navbar
-        # to hide its (now redundant) login buttons on this page.
-        @focus_login = true
-        render 'sessions/new', status: :unauthorized
-      end
-      format.json { render json: { error: t(:need_login) }, status: :unauthorized }
-    end
+    render_login_required(t(:login_required_to_post))
   end
 
   def set_paste

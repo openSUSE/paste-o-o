@@ -1,6 +1,6 @@
 .d-flex.flex-column.align-items-center.justify-content-center.h-100
   .text-center.mb-3
-    %h1= t(:need_login)
+    %h1= @login_message || t(:need_login)
   .row.justify-content-center.w-100
     .col-10.col-sm-6.col-lg-4
       - if Rails.env.development?

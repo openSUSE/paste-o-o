@@ -96,6 +96,8 @@ en:
   too_large: can't be larger than 2MB
   too_long: can't be longer than %{time}
   need_login: You need to log in before accessing that page
+  login_required_to_post: Please log in to create a paste.
+  login_required_to_view: Please log in to view this paste.
   close: Close
   login_success: Welcome back, traveller!
   login_failure: Authentication failed. Please try again

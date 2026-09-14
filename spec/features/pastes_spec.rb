@@ -6,7 +6,7 @@ RSpec.describe 'Pastes' do
   context 'when an anonymous user' do
     it 'is prompted to log in instead of the paste form', :aggregate_failures do
       visit '/'
-      expect(page).to have_text('You need to log in before accessing that page')
+      expect(page).to have_text('Please log in to create a paste.')
       expect(page).to have_no_field('paste_code')
     end
 

@@ -25,10 +25,11 @@ RSpec.describe 'Viewing pastes' do
       allow(Rails.configuration.site).to receive(:[]).with(:require_login_to_view).and_return(true)
     end
 
-    it 'forbids an anonymous user from viewing the paste' do
+    it 'prompts an anonymous user to log in', :aggregate_failures do
       get paste_url, as: :json
 
-      expect(response).to have_http_status(:forbidden)
+      expect(response).to have_http_status(:unauthorized)
+      expect(response.parsed_body['error']).to eq('Please log in to view this paste.')
     end
 
     it 'still lets an authenticated user view the paste' do
