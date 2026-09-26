@@ -19,6 +19,10 @@ module PastesHelper
     (marcel + mimemagic).uniq
   end
 
+  def paste_spam_params(paste_id, kind)
+    { pastes: { ids: [paste_id], marked_kinds: kind } }
+  end
+
   private
 
   def image(attachment)
