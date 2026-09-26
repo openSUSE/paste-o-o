@@ -95,7 +95,13 @@ class PastesController < ApplicationController
     return unless text_content
 
     classifier = Rails.application.config.classifier
-    @marked_kind = classifier.classify(text_content).downcase
+
+    scores = classifier.classifications(text_content)
+    @marked_kind = if scores['Ham'].infinite? || scores['Spam'].infinite?
+                     'unclassified'
+                   else
+                     classifier.classify(text_content).downcase
+                   end
   end
 
   def text?
