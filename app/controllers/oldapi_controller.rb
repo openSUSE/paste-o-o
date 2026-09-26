@@ -6,7 +6,7 @@ class OldapiController < ApplicationController
 
   # POST /
   def create
-    @paste = Paste.new(oldapi_params)
+    @paste = authorize Paste.new(oldapi_params)
 
     if @paste.save
       redirect_to "/#{@paste.permalink}", notice: t(:paste_created)

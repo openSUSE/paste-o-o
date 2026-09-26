@@ -5,10 +5,39 @@ require 'rails_helper'
 RSpec.describe 'Pastes' do
   describe 'POST /index' do
     let(:type) { :json }
+    let(:user) { User.create!(username: 'apiuser', email: 'api@opensuse.org') }
+    let(:auth) { user.auths.create!(name: 'test') }
     let!(:paste) do
-      post '/pastes', params: { paste: params }, headers: { 'Content-Type': 'application/json' }, as: type
+      post '/pastes', params: { paste: params.merge(auth_key: auth.key) },
+                      headers: { 'Content-Type': 'application/json' }, as: type
       get response.header['Location'], as: :json if response.header['Content-Type'].include? 'text/html'
       JSON.parse(body)
+    end
+
+    context 'without authentication' do
+      let(:params) { { title: 'name', author: 'author', code: 'spam', private: false } }
+
+      it 'rejects the paste' do
+        post '/pastes', params: { paste: params }, headers: { 'Content-Type': 'application/json' }, as: :json
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+
+    context 'without authentication when anonymous posting is allowed' do
+      let(:params) { { title: 'name', author: 'author', code: 'anonymous content', private: false } }
+
+      before do
+        # Operators can opt out of the login-to-post requirement.
+        allow(Rails.configuration.site).to receive(:fetch).and_call_original
+        allow(Rails.configuration.site).to receive(:fetch).with(:require_login_to_post, true).and_return(false)
+      end
+
+      it 'creates the paste' do
+        post '/pastes', params: { paste: params }, headers: { 'Content-Type': 'application/json' }, as: :json
+
+        expect(response).to have_http_status(:created)
+      end
     end
 
     context 'with a public paste' do
