@@ -61,7 +61,7 @@ RSpec.describe 'Pastes with Forbidden Terms' do
     context 'when no forbidden term matches' do
       before { Term.create!(subject: 'code', action: 'mark_spam', content: 'bad_word', regex: false) }
 
-      # rubocop:disable RSpec/ExampleLength
+      # rubocop:disable-next RSpec/ExampleLength
       it 'leaves the paste as unclassified and with default remove_at', :aggregate_failures do
         freeze_time do
           create_paste
@@ -70,7 +70,6 @@ RSpec.describe 'Pastes with Forbidden Terms' do
           expect(paste.remove_at).to be > 5.seconds.from_now
         end
       end
-      # rubocop:enable RSpec/ExampleLength
     end
   end
 end
