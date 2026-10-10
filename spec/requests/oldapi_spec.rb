@@ -4,8 +4,10 @@ require 'rails_helper'
 
 RSpec.describe 'Oldapis' do
   describe 'POST /index' do
+    let(:user) { User.create!(username: 'apiuser', email: 'api@opensuse.org') }
+    let(:auth) { user.auths.create!(name: 'test') }
     let!(:paste) do
-      post('/', params:)
+      post('/', params: params.merge(api_key: auth.key))
       response.redirect_url
     end
 
@@ -89,6 +91,14 @@ RSpec.describe 'Oldapis' do
 
         expect(body).to include('Paste failed to save.')
       end
+    end
+  end
+
+  describe 'POST / without an api key' do
+    it 'does not create the paste' do
+      post('/', params: { title: 'name', name: 'author', code: 'spam' })
+
+      expect(Paste.count).to eq 0
     end
   end
 

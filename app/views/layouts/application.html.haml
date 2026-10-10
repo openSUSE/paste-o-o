@@ -10,7 +10,7 @@
     = javascript_importmap_tags 'application'
     = favicon_link_tag 'favicon.ico'
   %body
-    = render partial: 'layouts/navbar'
+    = render partial: 'layouts/navbar', locals: { focus_login: @focus_login }
     .toast-container.position-fixed.toast-container-custom.end-0.p-3
       - flash.each do |type, text|
         - type = 'success' if type == 'notice'
