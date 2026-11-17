@@ -165,7 +165,7 @@ GEM
       rainbow
       rubocop (>= 1.0)
       sysexits (~> 1.1)
-    hashie (5.1.0)
+    hashie (6.0.0)
       logger
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
@@ -230,11 +230,11 @@ GEM
     nokogiri (1.19.7)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    omniauth (2.1.4)
-      hashie (>= 3.4.6)
+    omniauth (2.4.0)
+      hashie (>= 3.5.2)
       logger
-      rack (>= 2.2.3)
-      rack-protection
+      rack (>= 2.2.8)
+      rack-protection (>= 2.2.0)
     omniauth-rails_csrf_protection (2.0.1)
       actionpack (>= 4.2)
       omniauth (~> 2.0)
@@ -277,7 +277,7 @@ GEM
       faraday-follow_redirects
       json-jwt (>= 1.11.0)
       rack (>= 2.1.0)
-    rack-protection (4.2.1)
+    rack-protection (4.2.2)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
       rack (>= 3.0.0, < 4)
