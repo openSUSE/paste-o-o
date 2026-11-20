@@ -264,7 +264,7 @@ GEM
     prettyprint (0.2.1)
     prism (1.9.0)
     public_suffix (7.0.5)
-    puma (8.0.3)
+    puma (8.1.2)
       nio4r (~> 2.0)
     pundit (2.5.2)
       activesupport (>= 3.0.0)
@@ -480,7 +480,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   omniauth_openid_connect
   pg (~> 1.7)
-  puma (~> 8.0)
+  puma (~> 8.1)
   pundit (~> 2.5)
   rails (~> 8.1)
   redis
