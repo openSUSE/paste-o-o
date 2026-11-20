@@ -16,7 +16,7 @@ gem 'importmap-rails', '~> 2.2'
 gem 'pg', '~> 1.7'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 8.0'
+gem 'puma', '~> 8.1'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
