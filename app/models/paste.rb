@@ -54,9 +54,9 @@ class Paste < ApplicationRecord
   end
 
   def code
-    return '' unless content&.attachment
+    return '' unless content&.attachment && text?
 
-    content.attachment.open(&:read).force_encoding('utf-8')
+    @code ||= content.attachment.open(&:read).force_encoding('utf-8').scrub
   rescue StandardError => e
     Rails.logger.error("Paste##{id} failed to read attachment content: #{e.class}: #{e.message}")
     ''
@@ -107,6 +107,13 @@ class Paste < ApplicationRecord
 
   def enqueue_removal
     PastesCleanupJob.set(wait_until: remove_at).perform_later(id)
+  end
+
+  def text?
+    return false unless content&.blob
+
+    content_type = Rack::MediaType.type(content.blob.content_type)
+    Marcel::Magic.new(content_type).text? || MimeMagic.new(content_type).text?
   end
 
   def train_classifier
