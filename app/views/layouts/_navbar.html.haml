@@ -43,7 +43,7 @@
                 = button_to t(:log_out), '/logout',
                             method: :delete,
                             class: 'dropdown-item text-danger'
-        - else
+        - elsif !local_assigns[:focus_login]
           - auth = Rails.configuration.site[:authentication]
           - if Rails.env.development?
             = render 'sessions/form', provider: { id: 'developer',
